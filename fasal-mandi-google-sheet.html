@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fasal Mandi connects farmers directly with fair-price grain procurement and Farmer's Choice quality food products." />
+  <title>Fasal Mandi — Farmer's Choice</title>
+  <style>
+    :root{
+      --bg:#f7fbf2;
+      --card:#ffffff;
+      --ink:#1f2b20;
+      --muted:#677468;
+      --primary:#2f6b3a;
+      --primary-dark:#1e5129;
+      --secondary:#e7f0dc;
+      --accent:#d49a33;
+      --line:#e2e9df;
+      --danger:#b3473d;
+      --shadow:0 18px 50px rgba(35,63,39,.10);
+      --radius:22px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+    .shell{width:min(calc(100% - 32px),var(--max));margin:0 auto}
+    .topbar{display:flex;justify-content:center;align-items:center;padding:9px 16px;background:#214d2b;color:#fff;font-size:13px;letter-spacing:.02em}
+    header{position:sticky;top:0;z-index:30;background:rgba(247,251,242,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,233,223,.85)}
+    nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em}
+    .logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,#316f3d,#24592f);display:grid;place-items:center;box-shadow:0 8px 20px rgba(47,107,58,.2)}
+    .logo svg{width:29px;height:29px}
+    .brand-text{font-size:18px}.brand-text small{display:block;font-weight:600;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+    .navlinks{display:flex;gap:8px;align-items:center}
+    .navlinks button{border:0;background:transparent;color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:700}
+    .navlinks button:hover{background:var(--secondary);color:var(--primary-dark)}
+    .cart-btn{position:relative;border:1px solid var(--line)!important;background:#fff!important;color:var(--ink)!important;box-shadow:0 4px 16px rgba(25,45,30,.05)}
+    .badge{position:absolute;right:-5px;top:-5px;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800}
+    .menu{display:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:12px}
+
+    main{min-height:calc(100vh - 120px)}
+    .view{display:none}.view.active{display:block}
+    .hero{padding:64px 0 40px}
+    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;background:#e9f2df;border:1px solid #dbe8cf;border-radius:999px;color:var(--primary-dark);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+    h1{font-size:clamp(44px,6vw,78px);line-height:.97;letter-spacing:-.065em;margin:20px 0 18px;max-width:680px}
+    .hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:600px;margin:0 0 26px}
+    .pill-row{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 30px}
+    .pill{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;color:#526057}
+    .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:610px}
+    .choice-btn{position:relative;border:0;min-height:132px;border-radius:22px;padding:22px;text-align:left;color:#fff;box-shadow:var(--shadow);overflow:hidden;transition:.2s transform,.2s box-shadow}
+    .choice-btn:hover{transform:translateY(-3px);box-shadow:0 24px 55px rgba(35,63,39,.15)}
+    .choice-btn.sell{background:linear-gradient(140deg,#2d6d3b,#1c4f2a)}
+    .choice-btn.buy{background:linear-gradient(140deg,#b98022,#8f6418)}
+    .choice-btn .label{font-size:12px;opacity:.78;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
+    .choice-btn h3{margin:5px 0 4px;font-size:30px;letter-spacing:-.04em}
+    .choice-btn span{font-size:13px;opacity:.92}
+    .choice-icon{position:absolute;right:16px;bottom:10px;font-size:76px;opacity:.18}
+    .hero-visual{position:relative;min-height:460px;border-radius:32px;background:linear-gradient(180deg,#eef6e7 0%,#dceccf 100%);border:1px solid #dbe8cf;overflow:hidden;box-shadow:var(--shadow)}
+    .hero-visual .mini-card{position:absolute;z-index:3;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 10px 30px rgba(26,47,29,.1)}
+    .mini-card strong{display:block;font-size:14px}.mini-card small{color:var(--muted)}
+    .mc1{top:20px;left:20px}.mc2{right:18px;bottom:28px}.mc3{left:22px;bottom:22px}
+    .art{position:absolute;inset:0}
+    .trust{padding:8px 0 62px}.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .trust-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px}.trust-card b{display:block;font-size:14px}.trust-card span{color:var(--muted);font-size:12px;line-height:1.5}
+
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}.section-head h2{margin:0;font-size:32px;letter-spacing:-.04em}.section-head p{margin:5px 0 0;color:var(--muted)}
+    .back{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:12px;color:var(--muted);font-weight:700}
+    .page{padding:42px 0 70px}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+
+    .sell-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:24px;align-items:start}
+    .stepper{padding:24px;position:sticky;top:98px}.steps{display:grid;gap:12px;margin-top:16px}
+    .step{display:flex;gap:11px;align-items:flex-start;padding:13px;border-radius:15px}.step.active{background:var(--secondary)}
+    .dot{width:27px;height:27px;flex:0 0 27px;border-radius:50%;display:grid;place-items:center;background:#edf2ec;color:#657265;font-size:12px;font-weight:800}.step.active .dot{background:var(--primary);color:#fff}.step.done .dot{background:#b5cf9f;color:#254a2c}
+    .step b{font-size:14px;display:block}.step span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+    .form-card{padding:28px}.progress{height:7px;border-radius:999px;background:#edf2ec;overflow:hidden;margin:0 0 25px}.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),#8dbb5c);width:33.33%;transition:.25s}
+    .form-step{display:none}.form-step.active{display:block}
+    .form-step h3{font-size:25px;letter-spacing:-.035em;margin:0 0 5px}.form-step>p{margin:0 0 22px;color:var(--muted);font-size:14px}
+    .choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.option{border:1px solid var(--line);background:#fbfdf9;border-radius:17px;padding:17px;text-align:left;min-height:105px;transition:.2s}.option:hover{border-color:#b6ceb1;transform:translateY(-2px)}.option.selected{border:2px solid var(--primary);background:#eff6e9}.option .emoji{font-size:28px}.option b{display:block;margin-top:8px}.option span{font-size:12px;color:var(--muted)}
+    .field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:13px;font-weight:800}.field input,.field select{width:100%;border:1px solid var(--line);background:#fbfdf9;border-radius:13px;padding:13px 14px;outline:none}.field input:focus,.field select:focus{border-color:#9fc08d;box-shadow:0 0 0 4px #eef5e9}
+    .qty-row{display:grid;grid-template-columns:1fr 150px;gap:12px}.helper{color:var(--muted);font-size:12px;line-height:1.5}
+    .actions{display:flex;justify-content:space-between;gap:10px;margin-top:26px}.primary,.secondary-btn{border:0;padding:13px 18px;border-radius:13px;font-weight:800}.primary{background:var(--primary);color:#fff}.primary:hover{background:var(--primary-dark)}.secondary-btn{border:1px solid var(--line);background:#fff;color:#526057}
+    .summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}.summary-item{padding:14px;border:1px dashed #dbe4d7;border-radius:13px;background:#fbfdf9}.summary-item span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.summary-item b{display:block;margin-top:4px;font-size:14px}
+    .success{text-align:center;padding:20px}.success .check{width:72px;height:72px;border-radius:50%;background:#e4f1d9;display:grid;place-items:center;font-size:34px;margin:4px auto 16px}.success h3{margin:0 0 8px;font-size:27px}.success p{color:var(--muted);max-width:540px;margin:0 auto 18px;line-height:1.6}
+
+    .market-toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}.search{flex:1;min-width:220px;position:relative}.search input{width:100%;padding:14px 16px 14px 42px;border:1px solid var(--line);border-radius:14px;background:#fff;outline:none}.search svg{position:absolute;left:14px;top:14px;color:#809080}.filters{display:flex;gap:8px}.chip-btn{border:1px solid var(--line);background:#fff;color:#647066;border-radius:999px;padding:10px 13px;font-weight:700}.chip-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.product{overflow:hidden}.product-img{height:175px;background:linear-gradient(135deg,#edf4e7,#f7e8c7);display:grid;place-items:center;position:relative}.product-img svg{width:120px;height:120px}.tag{position:absolute;top:12px;left:12px;padding:6px 8px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.product-body{padding:17px}.product-body h3{margin:0;font-size:17px}.product-body p{margin:5px 0 12px;color:var(--muted);font-size:12px;min-height:34px}.price-row{display:flex;align-items:end;justify-content:space-between;gap:10px}.price b{font-size:21px}.price span{display:block;color:var(--muted);font-size:11px}.add{border:0;border-radius:11px;background:var(--primary);color:#fff;padding:10px 12px;font-size:12px;font-weight:800}.empty{grid-column:1/-1;text-align:center;padding:45px;color:var(--muted)}
+
+    .cart-drawer{position:fixed;inset:0;z-index:50;display:none}.cart-drawer.open{display:block}.shade{position:absolute;inset:0;background:rgba(20,32,22,.38)}.drawer{position:absolute;right:0;top:0;height:100%;width:min(420px,94vw);background:#fff;border-left:1px solid var(--line);padding:22px;display:flex;flex-direction:column;box-shadow:-18px 0 50px rgba(23,39,26,.16)}.drawer-head{display:flex;justify-content:space-between;align-items:center}.drawer-head h3{margin:0}.close{border:1px solid var(--line);background:#fff;border-radius:10px;width:38px;height:38px}.cart-items{margin:18px 0;display:grid;gap:10px;overflow:auto}.cart-item{display:grid;grid-template-columns:54px 1fr auto;gap:11px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px}.cart-thumb{width:54px;height:54px;border-radius:11px;background:#eef5e9;display:grid;place-items:center;font-size:25px}.cart-item b{display:block;font-size:13px}.cart-item small{color:var(--muted)}.cart-footer{margin-top:auto;border-top:1px solid var(--line);padding-top:15px}.total{display:flex;justify-content:space-between;font-weight:900;margin-bottom:12px}.checkout{width:100%;padding:13px;border:0;border-radius:13px;background:var(--primary);color:#fff;font-weight:800}
+
+    footer{padding:36px 0 48px;border-top:1px solid var(--line);margin-top:10px}.foot{display:flex;justify-content:space-between;gap:20px;align-items:center}.foot p{margin:0;color:var(--muted);font-size:13px}.foot-links{display:flex;gap:18px;color:#5e6a62;font-size:13px}
+
+    .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#213b26;color:#fff;padding:12px 15px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:70;font-size:13px;box-shadow:0 10px 30px rgba(22,40,25,.2)}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @media(max-width:950px){
+      .navlinks{display:none}.menu{display:block}
+      .hero-grid,.sell-layout{grid-template-columns:1fr}.hero-visual{min-height:360px}.stepper{position:relative;top:auto}.steps{grid-template-columns:repeat(3,1fr)}.step{padding:10px}.products{grid-template-columns:repeat(2,1fr)}.trust-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:650px){
+      .shell{width:min(calc(100% - 22px),var(--max))}.topbar{font-size:11px}.hero{padding:34px 0 26px}h1{font-size:46px}.hero-actions{grid-template-columns:1fr}.hero-visual{min-height:300px}.trust-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr 1fr}.field-grid,.summary{grid-template-columns:1fr}.field.full{grid-column:auto}.qty-row{grid-template-columns:1fr 120px}.form-card{padding:20px}.page{padding:28px 0 55px}.section-head{align-items:flex-start;flex-direction:column}.products{grid-template-columns:1fr 1fr;gap:11px}.product-img{height:130px}.product-body{padding:13px}.product-body h3{font-size:15px}.price b{font-size:18px}.add{padding:8px 10px}.foot{flex-direction:column;align-items:flex-start}.foot-links{flex-wrap:wrap}.mc2{right:10px}.mc1{left:10px}.mc3{left:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Fair-price grain procurement • Pickup in 2–3 days • Farmer-first marketplace</div>
+  <header>
+    <div class="shell">
+      <nav>
+        <button class="brand" onclick="showView('home')" aria-label="Go home" style="border:0;background:transparent;padding:0">
+          <div class="logo">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 33c10-7 20-10 30-9" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M12 37c0-11 4-19 12-25M21 34c1-10 5-17 13-23" stroke="#e3f1d8" stroke-width="3" stroke-linecap="round"/><ellipse cx="27" cy="12" rx="4" ry="7" fill="#d59a32"/><ellipse cx="34" cy="10" rx="4" ry="7" fill="#d59a32"/></svg>
+          </div>
+          <div class="brand-text">Fasal Mandi<small>by Farmer's Choice</small></div>
+        </button>
+        <div class="navlinks">
+          <button onclick="showView('sell')">Sell Grain</button>
+          <button onclick="showView('buy')">Buy Products</button>
+          <button class="cart-btn" onclick="openCart()">Cart <span class="badge" id="cartCount">0</span></button>
+        </div>
+        <button class="menu" onclick="toggleMobileMenu()">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="homeView" class="view active">
+      <div class="shell hero">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">🌾 Welcome to Fasal Mandi</span>
+            <h1>From your field to a fairer market.</h1>
+            <p>Farmers list their paddy, wheat and other grains. Our team checks the produce, arranges pickup within 2–3 days and pays a transparent market-linked price. We then supply raw grain or turn it into quality food products.</p>
+            <div class="pill-row">
+              <span class="pill">Direct farmer procurement</span>
+              <span class="pill">Quality checked</span>
+              <span class="pill">Fast pickup</span>
+              <span class="pill">Farmer's Choice products</span>
+            </div>
+            <div class="hero-actions">
+              <button class="choice-btn sell" onclick="showView('sell')"><span class="label">For farmers</span><h3>Sell</h3><span>List paddy, wheat, mustard & more</span><span class="choice-icon">🌾</span></button>
+              <button class="choice-btn buy" onclick="showView('buy')"><span class="label">For customers & buyers</span><h3>Buy</h3><span>Shop rice, flour, oil & bulk grain</span><span class="choice-icon">🛒</span></button>
+            </div>
+          </div>
+          <div class="hero-visual" aria-label="Farm illustration">
+            <div class="mini-card mc1"><strong>Pickup in 2–3 days</strong><small>After order placement</small></div>
+            <div class="mini-card mc2"><strong>Quality checked</strong><small>Weight + moisture + grade</small></div>
+            <div class="mini-card mc3"><strong>Farmer's Choice</strong><small>Rice • Flour • Oil • Grain</small></div>
+            <svg class="art" viewBox="0 0 620 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eaf5e0"/><stop offset="1" stop-color="#cfe4c1"/></linearGradient>
+                <linearGradient id="hill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#83ad68"/><stop offset="1" stop-color="#537b48"/></linearGradient>
+                <linearGradient id="field" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b1cc77"/><stop offset="1" stop-color="#6e9b4c"/></linearGradient>
+              </defs>
+              <rect width="620" height="520" fill="url(#sky)"/>
+              <circle cx="475" cy="86" r="45" fill="#d59a32" opacity=".92"/>
+              <path d="M0 280 C110 210 180 235 270 260 C390 295 430 190 620 215 L620 520 L0 520 Z" fill="url(#hill)" opacity=".75"/>
+              <path d="M0 322 C100 258 190 290 290 320 C390 350 495 300 620 314 L620 520 L0 520 Z" fill="url(#field)"/>
+              <path d="M0 380 C120 337 214 370 320 403 C435 439 523 391 620 372 L620 520 L0 520 Z" fill="#597f43" opacity=".45"/>
+              <g fill="none" stroke="#e2f0cf" stroke-width="3" stroke-linecap="round" opacity=".85">
+                <path d="M100 450 C110 408 105 370 96 338"/><path d="M132 463 C143 420 141 380 133 346"/><path d="M164 451 C176 410 178 372 171 338"/><path d="M195 474 C206 426 205 384 197 352"/><path d="M230 464 C239 423 241 384 235 355"/>
+              </g>
+              <g fill="#fff" opacity=".92"><path d="M70 86c30-20 61-18 88 2-25-4-45 2-64 18-10-8-18-14-24-20z"/><path d="M97 115c27-10 54-5 74 11-23-1-44 6-58 18-7-9-12-19-16-29z"/></g>
+              <g transform="translate(382 293)"><path d="M54 146c-8-52-4-103 7-136" stroke="#7c5433" stroke-width="10" stroke-linecap="round"/><path d="M59 75c-31-22-49-45-58-70M61 73c28-23 44-48 51-72" stroke="#4d7d43" stroke-width="10" stroke-linecap="round"/><path d="M54 125c-35-12-55-25-70-46M61 120c33-8 54-19 70-37" stroke="#4d7d43" stroke-width="10" stroke-linecap="round"/><circle cx="4" cy="4" r="14" fill="#406c38"/><circle cx="111" cy="0" r="14" fill="#406c38"/></g>
+              <g transform="translate(260 250)"><rect x="0" y="70" width="110" height="90" rx="9" fill="#f8f3df" stroke="#916b42" stroke-width="4"/><path d="M-8 72L55 18L118 72" fill="#8d4b34" stroke="#643526" stroke-width="5"/><rect x="48" y="105" width="18" height="55" fill="#7f5535"/><rect x="12" y="98" width="22" height="23" rx="3" fill="#d4e5ef"/><rect x="76" y="98" width="22" height="23" rx="3" fill="#d4e5ef"/></g>
+              <g transform="translate(165 360)"><path d="M0 90 C22 35 39 20 74 3" stroke="#f2f1c1" stroke-width="7" stroke-linecap="round"/><path d="M6 81 C26 67 47 59 70 58M17 60 C30 42 41 26 53 11" stroke="#8da656" stroke-width="6" stroke-linecap="round"/><g fill="#d7af45"><ellipse cx="84" cy="0" rx="7" ry="15" transform="rotate(23 84 0)"/><ellipse cx="95" cy="13" rx="7" ry="15" transform="rotate(28 95 13)"/><ellipse cx="101" cy="28" rx="7" ry="15" transform="rotate(30 101 28)"/></g></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="shell trust"><div class="trust-grid"><div class="trust-card"><b>01 • List your grain</b><span>Choose paddy, wheat, mustard or another crop.</span></div><div class="trust-card"><b>02 • We inspect</b><span>Our team verifies weight and basic quality.</span></div><div class="trust-card"><b>03 • We collect</b><span>Pickup is scheduled in 2–3 days.</span></div><div class="trust-card"><b>04 • We add value</b><span>Raw grain becomes rice, flour or oil.</span></div></div></div>
+      <footer><div class="shell foot"><p>© 2026 Fasal Mandi • A Farmer's Choice prototype</p><div class="foot-links"><span>Fair Price</span><span>Trusted Procurement</span><span>Quality Products</span></div></div></footer>
+    </section>
+
+    <section id="sellView" class="view">
+      <div class="shell page">
+        <div class="section-head"><div><button class="back" onclick="showView('home')">← Back</button><h2 style="margin-top:18px">Sell your grain</h2><p>Tell us what you have. Our team will contact you and arrange pickup.</p></div></div>
+        <div class="sell-layout">
+          <div class="panel stepper"><span class="eyebrow" style="font-size:10px">Farmer pickup journey</span><div class="steps">
+            <div class="step active" data-sell-step="1"><div class="dot">1</div><div><b>Choose product</b><span>Paddy, wheat, mustard & more</span></div></div>
+            <div class="step" data-sell-step="2"><div class="dot">2</div><div><b>Quantity & quality</b><span>Quantity + unit + variety</span></div></div>
+            <div class="step" data-sell-step="3"><div class="dot">3</div><div><b>Pickup details</b><span>Where should our team visit?</span></div></div>
+          </div></div>
+          <div class="panel form-card">
+            <div class="progress"><div class="progress-bar" id="sellProgress"></div></div>
+            <div class="form-step active" data-form-step="1"><h3>What do you want to sell?</h3><p>Select the grain you currently have ready.</p><div class="choice-grid" id="productOptions"></div><div class="actions"><span></span><button class="primary" onclick="nextSellStep(2)">Continue →</button></div></div>
+            <div class="form-step" data-form-step="2"><h3>Tell us about your grain</h3><p>These details help us prepare the right procurement offer.</p><div class="field-grid"><div class="field"><label>Variety</label><select id="variety"></select></div><div class="field"><label>Quantity</label><div class="qty-row"><input id="quantity" type="number" min="1" step="0.1" placeholder="e.g. 25"/><select id="unit"><option value="quintal">Quintal</option><option value="kg">Kg</option></select></div></div><div class="field"><label>Harvest / stock status</label><select id="stockStatus"><option>Freshly harvested</option><option>Stored & ready</option><option>Drying / drying completed</option></select></div><div class="field"><label>Expected price (optional)</label><input id="expectedPrice" type="number" min="0" placeholder="₹ per quintal"/></div><div class="field full"><label>Extra notes (optional)</label><input id="grainNotes" placeholder="Example: very clean, low moisture, available from 10 Oct"/></div></div><div class="actions"><button class="secondary-btn" onclick="nextSellStep(1)">← Back</button><button class="primary" onclick="nextSellStep(3)">Continue →</button></div></div>
+            <div class="form-step" data-form-step="3"><h3>Where should we collect it?</h3><p>Our team will usually contact you within 2–3 days after submission.</p><div class="field-grid"><div class="field"><label>Farmer name</label><input id="farmerName" placeholder="Your full name"/></div><div class="field"><label>Mobile number</label><input id="phone" type="tel" placeholder="10-digit mobile number"/></div><div class="field full"><label>Village / area</label><input id="village" placeholder="Village, block, district"/></div><div class="field"><label>Preferred pickup date</label><input id="pickupDate" type="date"/></div><div class="field"><label>Pickup landmark</label><input id="landmark" placeholder="School, market, road, etc."/></div></div><div class="helper" style="margin-top:14px">By placing the request, you agree to a physical quality and weight check before the final purchase price is confirmed.</div><div class="actions"><button class="secondary-btn" onclick="nextSellStep(2)">← Back</button><button class="primary" onclick="placeSellOrder()">Place pickup request</button></div></div>
+            <div class="form-step" data-form-step="4"><div class="success"><div class="check">✓</div><h3>Pickup request received!</h3><p id="successText">Your request has been saved. Our procurement team will contact you to confirm the visit and final purchase details.</p><div class="summary" id="successSummary"></div><div class="actions" style="justify-content:center"><button class="secondary-btn" onclick="showView('home')">Back to home</button><button class="primary" onclick="resetSell()">Sell another lot</button></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="buyView" class="view">
+      <div class="shell page">
+        <div class="section-head"><div><button class="back" onclick="showView('home')">← Back</button><h2 style="margin-top:18px">Shop Farmer's Choice</h2><p>Quality grain and value-added products from our procurement network.</p></div><button class="primary" onclick="openCart()">View cart <span id="cartCount2">0</span></button></div>
+        <div class="panel" style="padding:18px">
+          <div class="market-toolbar"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchBox" placeholder="Search rice, flour, paddy, wheat..." oninput="renderProducts()"/></div><div class="filters" id="filters"></div></div>
+          <div class="products" id="products"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-drawer" id="cartDrawer"><div class="shade" onclick="closeCart()"></div><aside class="drawer"><div class="drawer-head"><h3>Your cart</h3><button class="close" onclick="closeCart()">✕</button></div><div class="cart-items" id="cartItems"></div><div class="cart-footer"><div class="total"><span>Total</span><span id="cartTotal">₹0</span></div><button class="checkout" onclick="checkout()">Proceed to checkout</button></div></aside></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // After deploying the Google Apps Script, paste its Web App URL here.
+    // Example: https://script.google.com/macros/s/XXXXXXXX/exec
+    const GOOGLE_SHEET_WEB_APP_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    const productData = {
+      Paddy:{emoji:'🌾', varieties:['Miniket','Swarna','IR-36','Gobindobhog','Other']},
+      Wheat:{emoji:'🌾', varieties:['Lokwan','Sharbati','PBW','Local variety','Other']},
+      Mustard:{emoji:'🌼', varieties:['Black mustard','Yellow mustard','Local variety','Other']},
+      Maize:{emoji:'🌽', varieties:['Yellow maize','White maize','Local variety','Other']},
+      Other:{emoji:'🌱', varieties:['Local variety','Other']}
+    };
+    const products = [
+      {id:1,name:'Swarna Raw Paddy',cat:'Raw Grain',icon:'🌾',unit:'quintal',price:2550,desc:'Clean paddy for rice mills and bulk buyers.'},
+      {id:2,name:'Miniket Premium Rice',cat:'Rice',icon:'🍚',unit:'kg',price:74,desc:'Everyday premium rice with consistent grain quality.'},
+      {id:3,name:'Stoneground Wheat Flour',cat:'Flour',icon:'🌾',unit:'kg',price:54,desc:'Freshly milled wheat flour for home and bulk use.'},
+      {id:4,name:'Cold-Pressed Mustard Oil',cat:'Oil',icon:'🫗',unit:'litre',price:158,desc:'A bold, traditional mustard oil for everyday cooking.'},
+      {id:5,name:'Premium Sharbati Wheat',cat:'Raw Grain',icon:'🌾',unit:'quintal',price:2920,desc:'Selected wheat for premium flour production.'},
+      {id:6,name:"Farmer's Choice Rice 5 kg",cat:'Rice',icon:'🍚',unit:'pack',price:365,desc:'Family pack from our direct procurement network.'},
+      {id:7,name:'Whole Wheat Atta 10 kg',cat:'Flour',icon:'🌾',unit:'pack',price:510,desc:'Soft atta made from carefully selected wheat.'},
+      {id:8,name:'Yellow Mustard Seed',cat:'Raw Grain',icon:'🌼',unit:'kg',price:93,desc:'Clean mustard seed for household or bulk use.'}
+    ];
+    let selectedProduct='Paddy', sellStep=1, cart=[];
+
+    function showView(view){
+      document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+      document.getElementById(view+'View').classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+      if(view==='buy') renderProducts();
+      if(window.innerWidth<=950) document.querySelector('.navlinks').style.display='none';
+    }
+    function toggleMobileMenu(){
+      const n=document.querySelector('.navlinks'); n.style.display=n.style.display==='flex'?'none':'flex';
+      if(n.style.display==='flex'){n.style.position='absolute';n.style.top='70px';n.style.right='12px';n.style.background='#fff';n.style.padding='10px';n.style.border='1px solid var(--line)';n.style.borderRadius='16px';n.style.flexDirection='column';n.style.boxShadow='var(--shadow)'}
+    }
+    function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
+    function renderProductOptions(){
+      const box=document.getElementById('productOptions');
+      box.innerHTML=Object.entries(productData).map(([name,meta])=>`<button type="button" class="option ${name===selectedProduct?'selected':''}" onclick="selectSellProduct('${name}')"><span class="emoji">${meta.emoji}</span><b>${name}</b><span>${name==='Other'?'Tell us what you have':'Ready for pickup'}</span></button>`).join('');
+    }
+    function selectSellProduct(name){selectedProduct=name;renderProductOptions();populateVarieties();}
+    function populateVarieties(){document.getElementById('variety').innerHTML=productData[selectedProduct].varieties.map(v=>`<option>${v}</option>`).join('')}
+    function nextSellStep(step){
+      if(step===2 && !selectedProduct){toast('Please choose a product');return}
+      if(step===3){
+        const q=parseFloat(document.getElementById('quantity').value||0); if(!q||q<=0){toast('Please enter a valid quantity');return}
+      }
+      sellStep=step;updateSellUI();
+    }
+    function updateSellUI(){
+      document.querySelectorAll('[data-form-step]').forEach(x=>x.classList.toggle('active',Number(x.dataset.formStep)===sellStep));
+      document.querySelectorAll('[data-sell-step]').forEach(x=>{const s=Number(x.dataset.sellStep);x.classList.toggle('active',s===sellStep);x.classList.toggle('done',s<sellStep)});
+      document.getElementById('sellProgress').style.width=(sellStep===4?'100':sellStep*33.333)+'%';
+    }
+    function placeSellOrder(){
+      const name=document.getElementById('farmerName').value.trim(), phone=document.getElementById('phone').value.trim(), village=document.getElementById('village').value.trim(), qty=document.getElementById('quantity').value.trim();
+      if(!name||!phone||!village||!qty){toast('Please complete the required fields');return}
+      if(phone.replace(/\D/g,'').length<10){toast('Please enter a valid mobile number');return}
+      const unit=document.getElementById('unit').value;const variety=document.getElementById('variety').value;
+      const orderId='FM-'+new Date().getFullYear()+'-'+Math.floor(100000+Math.random()*900000);
+      document.getElementById('successText').textContent=`Request ${orderId} is confirmed. Our team will contact ${name} and coordinate a pickup within 2–3 days.`;
+      document.getElementById('successSummary').innerHTML=`<div class="summary-item"><span>Product</span><b>${selectedProduct}</b></div><div class="summary-item"><span>Variety</span><b>${variety}</b></div><div class="summary-item"><span>Quantity</span><b>${qty} ${unit}</b></div><div class="summary-item"><span>Pickup area</span><b>${village}</b></div>`;
+      const requestData={
+        orderId,
+        product:selectedProduct,
+        variety,
+        quantity:qty,
+        unit,
+        stockStatus:document.getElementById('stockStatus').value,
+        expectedPrice:document.getElementById('expectedPrice').value.trim(),
+        grainNotes:document.getElementById('grainNotes').value.trim(),
+        farmerName:name,
+        phone,
+        village,
+        pickupDate:document.getElementById('pickupDate').value,
+        landmark:document.getElementById('landmark').value.trim(),
+        submittedAt:new Date().toISOString()
+      };
+      try{localStorage.setItem('lastFasalMandiOrder',JSON.stringify(requestData));}catch(e){}
+
+      // Save the request to your Google Sheet when the Web App URL is configured.
+      if(GOOGLE_SHEET_WEB_APP_URL && !GOOGLE_SHEET_WEB_APP_URL.includes('PASTE_YOUR_')){
+        try{
+          fetch(GOOGLE_SHEET_WEB_APP_URL,{
+            method:'POST',
+            mode:'no-cors',
+            headers:{'Content-Type':'text/plain;charset=utf-8'},
+            body:JSON.stringify(requestData),
+            keepalive:true
+          });
+        }catch(e){ console.warn('Google Sheet submission failed:',e); }
+      }
+
+      sellStep=4;updateSellUI();
+      toast(GOOGLE_SHEET_WEB_APP_URL.includes('PASTE_YOUR_')
+        ? 'Request submitted on this device'
+        : 'Request sent to Fasal Mandi');
+    }
+    function resetSell(){
+      ['quantity','expectedPrice','grainNotes','farmerName','phone','village','landmark'].forEach(id=>document.getElementById(id).value='');
+      sellStep=1;selectedProduct='Paddy';renderProductOptions();populateVarieties();updateSellUI();
+    }
+    function renderFilters(){
+      const cats=['All','Rice','Flour','Oil','Raw Grain'];document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="chip-btn ${i===0?'active':''}" data-cat="${c}" onclick="filterProducts('${c}',this)">${c}</button>`).join('');
+    }
+    let activeCat='All';
+    function filterProducts(cat,el){activeCat=cat;document.querySelectorAll('.chip-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderProducts()}
+    function renderProducts(){
+      const q=(document.getElementById('searchBox')?.value||'').toLowerCase();const list=products.filter(p=>(activeCat==='All'||p.cat===activeCat)&&(`${p.name} ${p.cat} ${p.desc}`.toLowerCase().includes(q)));
+      const box=document.getElementById('products');
+      if(!list.length){box.innerHTML='<div class="empty">No products match your search. Try another grain, rice, flour or oil.</div>';return}
+      box.innerHTML=list.map(p=>`<article class="product panel"><div class="product-img"><span class="tag">${p.cat}</span><div style="font-size:74px">${p.icon}</div></div><div class="product-body"><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><div class="price"><b>₹${p.price}</b><span>per ${p.unit}</span></div><button class="add" onclick="addToCart(${p.id})">Add</button></div></div></article>`).join('');
+    }
+    function addToCart(id){const p=products.find(x=>x.id===id);const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({id,qty:1});updateCart();toast(`${p.name} added to cart`)}
+    function updateCart(){
+      const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;document.getElementById('cartCount2').textContent=count;
+      const box=document.getElementById('cartItems');
+      if(!cart.length){box.innerHTML='<div class="empty" style="padding:35px 5px">Your cart is empty.<br/>Add Farmer\'s Choice products to continue.</div>';document.getElementById('cartTotal').textContent='₹0';return}
+      let total=0;box.innerHTML=cart.map(item=>{const p=products.find(x=>x.id===item.id);total+=p.price*item.qty;return `<div class="cart-item"><div class="cart-thumb">${p.icon}</div><div><b>${p.name}</b><small>₹${p.price} × ${item.qty}</small></div><button class="close" style="width:32px;height:32px" onclick="removeCart(${p.id})">−</button></div>`}).join('');document.getElementById('cartTotal').textContent='₹'+total.toLocaleString('en-IN');
+    }
+    function removeCart(id){const i=cart.findIndex(x=>x.id===id);if(i<0)return;cart[i].qty--;if(cart[i].qty<=0)cart.splice(i,1);updateCart()}
+    function openCart(){document.getElementById('cartDrawer').classList.add('open');updateCart()}
+    function closeCart(){document.getElementById('cartDrawer').classList.remove('open')}
+    function checkout(){if(!cart.length){toast('Your cart is empty');return}toast('Demo checkout: connect your payment/order system here');}
+
+    document.addEventListener('DOMContentLoaded',()=>{renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
+  </script>
+
+<footer class="founder-footer"><div class="founder-card"><div class="founder-badge">FM</div><div class="founder-content"><p class="founder-label">ABOUT THE FOUNDER</p><h2>Built by Asikur Rahaman</h2><p>Fasal Mandi is built with a simple goal: to help farmers get a fair, transparent price for their agricultural products and connect them with better markets.</p><div class="founder-contact"><a href="mailto:asikur591@gmail.com">✉ asikur591@gmail.com</a><a href="tel:+917908059105">☎ +91 79080 59105</a></div></div></div><p class="footer-copy">© 2026 Fasal Mandi · Farmer first, fairer markets.</p></footer><style>.founder-footer{margin-top:60px;padding:28px 20px 22px;background:#10281d;color:#fff}.founder-card{max-width:1050px;margin:auto;display:flex;gap:20px;align-items:center}.founder-badge{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#d9a441;color:#10281d;display:grid;place-items:center;font-weight:800;font-size:20px}.founder-label{margin:0 0 5px;font-size:11px;letter-spacing:1.5px;opacity:.7}.founder-content h2{margin:0 0 8px;font-size:22px}.founder-content p{margin:0 0 12px;line-height:1.55;color:#dce8df}.founder-contact{display:flex;gap:18px;flex-wrap:wrap}.founder-contact a{color:#fff;text-decoration:none;font-weight:600}.footer-copy{max-width:1050px;margin:20px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#aebfb3}@media(max-width:600px){.founder-card{align-items:flex-start}.founder-content h2{font-size:19px}.founder-contact{gap:10px;flex-direction:column}}</style>
+</body>
+</html>
