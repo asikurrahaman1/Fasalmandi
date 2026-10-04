@@ -40,7 +40,7 @@
     .navlinks button:hover{background:var(--secondary);color:var(--primary-dark)}
     .cart-btn{position:relative;border:1px solid var(--line)!important;background:#fff!important;color:var(--ink)!important;box-shadow:0 4px 16px rgba(25,45,30,.05)}
     .badge{position:absolute;right:-5px;top:-5px;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800}
-    .menu{display:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:12px}
+    .menu{display:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:12px}.mobile-menu-item{display:none}
 
     main{min-height:calc(100vh - 120px)}
     .view{display:none}.view.active{display:block}
@@ -98,7 +98,7 @@
     .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#213b26;color:#fff;padding:12px 15px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:70;font-size:13px;box-shadow:0 10px 30px rgba(22,40,25,.2)}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     @media(max-width:950px){
-      .navlinks{display:none}.menu{display:block}
+      .navlinks{display:none}.menu{display:block}.mobile-menu-item{display:block}
       .hero-grid,.sell-layout{grid-template-columns:1fr}.hero-visual{min-height:360px}.stepper{position:relative;top:auto}.steps{grid-template-columns:repeat(3,1fr)}.step{padding:10px}.products{grid-template-columns:repeat(2,1fr)}.trust-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:650px){
@@ -119,7 +119,7 @@
     .order-step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;position:relative}
     .order-step .num{width:36px;height:36px;border-radius:11px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:13px}
     .order-step h3{margin:0 0 6px;font-size:17px}.order-step p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
-    .checkout-view{display:none}.checkout-view.active{display:block}.checkout-view .page{padding-top:28px}.cart-qty{display:flex;align-items:center;gap:6px}.cart-qty button{border:1px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;font-weight:900;color:var(--primary-dark)}.cart-qty span{min-width:20px;text-align:center;font-weight:800}.order-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.tool-btn{border:1px solid var(--line);background:#fff;color:var(--primary-dark);padding:11px 14px;border-radius:12px;font-weight:800}.tool-btn.primary-tool{background:var(--primary);color:#fff;border-color:var(--primary)}.history-panel,.account-panel{display:none;margin-top:18px}.history-panel.open,.account-panel.open{display:block}.history-list{display:grid;gap:10px}.history-item{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfdf9}.history-item b{display:block}.history-item small{color:var(--muted);line-height:1.5}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.account-box{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfdf9}.account-box h4{margin:0 0 6px}.account-box p{margin:0 0 12px;color:var(--muted);font-size:12px}.account-box input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#fff}.account-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
+    .checkout-view{display:none}.checkout-view.active{display:block}.checkout-view .page{padding-top:28px}.cart-qty{display:flex;align-items:center;gap:6px}.cart-qty button{border:1px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;font-weight:900;color:var(--primary-dark)}.cart-qty span{min-width:20px;text-align:center;font-weight:800}.order-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.tool-btn{border:1px solid var(--line);background:#fff;color:var(--primary-dark);padding:11px 14px;border-radius:12px;font-weight:800}.tool-btn.primary-tool{background:var(--primary);color:#fff;border-color:var(--primary)}.history-panel,.account-panel{display:none;margin-top:18px}.history-panel.open,.account-panel.open{display:block}.history-list{display:grid;gap:10px}.history-item{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfdf9}.history-item b{display:block}.history-item small{color:var(--muted);line-height:1.5}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.account-box{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfdf9}.account-box h4{margin:0 0 6px}.account-box p{margin:0 0 12px;color:var(--muted);font-size:12px}.account-box input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#fff}.account-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.account-status{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#e9f2df;color:var(--primary-dark);font-size:12px;font-weight:800;margin-bottom:12px}.login-required{padding:13px 14px;border:1px solid #ead9aa;background:#fff9e9;border-radius:13px;color:#765a1d;font-size:13px;line-height:1.5;margin-bottom:16px}
     .checkout-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
     .checkout-card{padding:25px}.checkout-card h3{margin:0 0 5px;font-size:24px}.checkout-card>p{margin:0 0 20px;color:var(--muted)}
     .payment-options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 18px}
@@ -131,7 +131,7 @@
     .upi-note{padding:12px 14px;border-radius:13px;background:#fff8e6;border:1px solid #ecd8a8;color:#705a2d;font-size:12px;line-height:1.5;margin-top:12px}
     .mini-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#edf5e8;color:var(--primary-dark);font-size:11px;font-weight:800}
     @media(max-width:950px){.photo-grid{grid-template-columns:1fr 1fr}.photo-card.large{grid-column:1/-1}.checkout-layout{grid-template-columns:1fr}}
-    @media(max-width:700px){.order-steps,.photo-grid{grid-template-columns:1fr}.photo-card.large{grid-column:auto}.payment-options{grid-template-columns:1fr}}
+    @media(max-width:700px){.order-steps,.photo-grid{grid-template-columns:1fr}.photo-card.large{grid-column:auto}.payment-options{grid-template-columns:1fr}.mobile-menu-item{display:block}}
 
   </style>
 </head>
@@ -150,6 +150,8 @@
           <button onclick="showView('sell')">Sell Grain</button>
           <button onclick="showView('buy')">Buy Products</button>
           <button class="cart-btn" onclick="openCart()">Cart <span class="badge" id="cartCount">0</span></button>
+          <button class="mobile-menu-item" onclick="openOrderHistoryFromMenu()">📦 Order History</button>
+          <button class="mobile-menu-item" onclick="openAccountFromMenu()">👤 Login / Sign up</button>
         </div>
         <button class="menu" onclick="toggleMobileMenu()">☰</button>
       </nav>
@@ -229,14 +231,10 @@
           </div>
           <div class="order-steps">
             <article class="order-step"><div class="num">1</div><h3>Choose</h3><p>Select Sell or Buy, then choose the grain, variety or finished product you need.</p></article>
-            <article class="order-step"><div class="num">2</div><h3>Place your order</h3><p>Enter quantity and contact details. Farmers get a pickup request; buyers get a checkout page.</p></article>
+            <article class="order-step"><div class="num">2</div><h3>Place your order</h3><p>Enter quantity and contact details. Login is required before submitting a Buy or Sell order.</p></article>
             <article class="order-step"><div class="num">3</div><h3>We complete it</h3><p>Our team arranges collection or delivery and confirms the final order and payment.</p></article>
           </div>
-          <div class="order-tools">
-            <button class="tool-btn" onclick="toggleOrderHistory()">📦 Order History</button>
-            <button class="tool-btn" onclick="openCart()">🛒 Cart <span id="homeCartCount">0</span></button>
-            <button class="tool-btn primary-tool" onclick="toggleAccount()">👤 Login / Sign up</button>
-          </div>
+
           <div id="historyPanel" class="history-panel">
             <div class="panel" style="padding:18px">
               <h3 style="margin:0 0 6px">Your order history</h3>
@@ -247,12 +245,12 @@
           <div id="accountPanel" class="account-panel">
             <div class="panel" style="padding:18px">
               <h3 style="margin:0 0 6px">Your Fasal Mandi account</h3>
-              <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Login and sign-up can be added. For now this is a simple prototype stored on this device.</p>
-              <div class="account-grid">
+              <p style="margin:0 0 14px;color:var(--muted);font-size:13px">A Fasal Mandi account is required to place a Buy or Sell order. You can browse products without logging in.</p>
+              <div id="accountLoggedIn" class="account-status" style="display:none">✓ Logged in</div><button class="secondary-btn" onclick="logoutAccount()" style="display:none" id="logoutBtn">Logout</button><div class="account-grid">
                 <div class="account-box"><h4>Login</h4><p>Use your mobile number and password.</p><input id="loginPhone" type="tel" placeholder="Mobile number"><input id="loginPassword" type="password" placeholder="Password"><button class="primary" onclick="demoLogin()">Login</button></div>
                 <div class="account-box"><h4>Sign up</h4><p>Create a basic account on this device.</p><input id="signupName" placeholder="Full name"><input id="signupPhone" type="tel" placeholder="Mobile number"><input id="signupPassword" type="password" placeholder="Password"><button class="primary" onclick="demoSignup()">Sign up</button></div>
               </div>
-              <div class="account-note">For a real customer login system that works across devices, we should later connect Firebase, Supabase, or another secure authentication service. Do not store real passwords in plain localStorage.</div>
+              <div id="accountStatus" class="account-note">Please log in or sign up before placing a Buy or Sell order. This version uses a local prototype account; a real multi-device login system can be connected later.</div>
             </div>
           </div>
         </div>
@@ -304,7 +302,7 @@
         <div class="panel checkout-card">
           <span class="mini-badge">🛍️ Farmer's Choice</span>
           <h3 style="margin-top:12px">Delivery details</h3>
-          <p>We'll use these details to contact you about your order.</p>
+          <p>We'll use these details to contact you about your order. <span class="mini-badge">Login required to place this order</span></p>
           <div class="field-grid">
             <div class="field"><label>Customer name</label><input id="buyerName" placeholder="Full name"></div>
             <div class="field"><label>Mobile number</label><input id="buyerPhone" type="tel" placeholder="10-digit mobile number"></div>
@@ -363,8 +361,40 @@
       if(window.innerWidth<=950) document.querySelector('.navlinks').style.display='none';
     }
     function toggleMobileMenu(){
-      const n=document.querySelector('.navlinks'); n.style.display=n.style.display==='flex'?'none':'flex';
-      if(n.style.display==='flex'){n.style.position='absolute';n.style.top='70px';n.style.right='12px';n.style.background='#fff';n.style.padding='10px';n.style.border='1px solid var(--line)';n.style.borderRadius='16px';n.style.flexDirection='column';n.style.boxShadow='var(--shadow)'}
+      const n=document.querySelector('.navlinks');
+      n.style.display=n.style.display==='flex'?'none':'flex';
+      if(n.style.display==='flex'){
+        n.style.position='absolute';
+        n.style.top='70px';
+        n.style.right='12px';
+        n.style.background='#fff';
+        n.style.padding='10px';
+        n.style.border='1px solid var(--line)';
+        n.style.borderRadius='16px';
+        n.style.flexDirection='column';
+        n.style.boxShadow='var(--shadow)';
+      }
+    }
+    function closeMobileMenu(){
+      const n=document.querySelector('.navlinks');
+      if(window.innerWidth<=950) n.style.display='none';
+    }
+    function openOrderHistoryFromMenu(){
+      closeMobileMenu();
+      showView('home');
+      const p=document.getElementById('historyPanel');
+      document.getElementById('accountPanel').classList.remove('open');
+      p.classList.add('open');
+      renderOrderHistory();
+      setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),100);
+    }
+    function openAccountFromMenu(){
+      closeMobileMenu();
+      showView('home');
+      const p=document.getElementById('accountPanel');
+      document.getElementById('historyPanel').classList.remove('open');
+      p.classList.add('open');
+      setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),100);
     }
     function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
     function renderProductOptions(){
@@ -386,6 +416,7 @@
       document.getElementById('sellProgress').style.width=(sellStep===4?'100':sellStep*33.333)+'%';
     }
     function placeSellOrder(){
+      if(!requireLogin('placing a Sell order')) return;
       const name=document.getElementById('farmerName').value.trim(), phone=document.getElementById('phone').value.trim(), village=document.getElementById('village').value.trim(), qty=document.getElementById('quantity').value.trim();
       if(!name||!phone||!village||!qty){toast('Please complete the required fields');return}
       if(phone.replace(/\D/g,'').length<10){toast('Please enter a valid mobile number');return}
@@ -451,7 +482,7 @@
     }
     function addToCart(id){const p=products.find(x=>x.id===id);const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({id,qty:1});updateCart();toast(`${p.name} added to cart`)}
     function updateCart(){
-      const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;document.getElementById('cartCount2').textContent=count;document.getElementById('homeCartCount').textContent=count;
+      const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;document.getElementById('cartCount2').textContent=count;
       const box=document.getElementById('cartItems');
       if(!cart.length){box.innerHTML='<div class="empty" style="padding:35px 5px">Your cart is empty.<br/>Add Farmer\'s Choice products to continue.</div>';document.getElementById('cartTotal').textContent='₹0';return}
       let total=0;box.innerHTML=cart.map(item=>{const p=products.find(x=>x.id===item.id);total+=p.price*item.qty;return `<div class="cart-item"><div class="cart-thumb">${p.icon}</div><div><b>${p.name}</b><small>₹${p.price} each</small></div><div class="cart-qty"><button onclick="removeCart(${p.id})" aria-label="Decrease quantity">−</button><span>${item.qty}</span><button onclick="addToCart(${p.id})" aria-label="Increase quantity">+</button></div></div>`}).join('');document.getElementById('cartTotal').textContent='₹'+total.toLocaleString('en-IN');
@@ -506,27 +537,78 @@
       document.getElementById('historyPanel').classList.remove('open');
       if(p.classList.contains('open'))p.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
+    function getCurrentAccount(){
+      try{return JSON.parse(localStorage.getItem('fasalMandiLoggedIn')||'null')}catch(e){return null;}
+    }
+    function updateAccountUI(){
+      const account=getCurrentAccount();
+      const status=document.getElementById('accountStatus');
+      const logged=document.getElementById('accountLoggedIn');
+      const logout=document.getElementById('logoutBtn');
+      if(account){
+        if(logged){logged.style.display='inline-flex';logged.textContent='✓ Logged in as '+account.name;}
+        if(status) status.textContent='You are logged in. You can now place Buy and Sell orders.';
+        if(logout) logout.style.display='inline-block';
+      }else{
+        if(logged) logged.style.display='none';
+        if(logout) logout.style.display='none';
+        if(status) status.textContent='Please log in or sign up before placing a Buy or Sell order. This version uses a local prototype account; a real multi-device login system can be connected later.';
+      }
+    }
+    function requireLogin(action){
+      if(getCurrentAccount()) return true;
+      toast('Please Login / Sign up before '+action);
+      openAccountFromMenu();
+      return false;
+    }
     function demoSignup(){
-      const name=document.getElementById('signupName').value.trim(),phone=document.getElementById('signupPhone').value.trim(),password=document.getElementById('signupPassword').value;
-      if(!name||phone.replace(/\D/g,'').length<10||!password){toast('Please complete sign up details');return;}
-      try{localStorage.setItem('fasalMandiDemoAccount',JSON.stringify({name,phone}));}catch(e){}
-      toast('Demo account created on this device');
+      const name=document.getElementById('signupName').value.trim();
+      const phone=document.getElementById('signupPhone').value.trim();
+      const password=document.getElementById('signupPassword').value;
+      if(!name||phone.replace(/\D/g,'').length<10||password.length<4){toast('Enter name, valid mobile and password (4+ characters)');return;}
+      const account={name,phone,password};
+      try{
+        localStorage.setItem('fasalMandiDemoAccount',JSON.stringify(account));
+        localStorage.setItem('fasalMandiLoggedIn',JSON.stringify({name,phone}));
+      }catch(e){}
+      document.getElementById('signupPassword').value='';
+      document.getElementById('loginPassword').value='';
+      updateAccountUI();
+      toast('Account created. You are now logged in.');
     }
     function demoLogin(){
-      const phone=document.getElementById('loginPhone').value.trim(),password=document.getElementById('loginPassword').value;
-      let account=null;try{account=JSON.parse(localStorage.getItem('fasalMandiDemoAccount')||'null')}catch(e){}
-      if(account&&account.phone===phone&&password){toast('Demo login successful');}else{toast('Demo account not found — sign up first');}
+      const phone=document.getElementById('loginPhone').value.trim();
+      const password=document.getElementById('loginPassword').value;
+      let account=null;
+      try{account=JSON.parse(localStorage.getItem('fasalMandiDemoAccount')||'null')}catch(e){}
+      if(!account){toast('Account not found — please sign up first');return;}
+      if(account.phone===phone&&account.password===password){
+        localStorage.setItem('fasalMandiLoggedIn',JSON.stringify({name:account.name,phone:account.phone}));
+        document.getElementById('loginPassword').value='';
+        updateAccountUI();
+        toast('Login successful');
+      }else{
+        toast('Incorrect mobile number or password');
+      }
+    }
+    function logoutAccount(){
+      localStorage.removeItem('fasalMandiLoggedIn');
+      updateAccountUI();
+      toast('Logged out');
     }
 
     function checkout(){
       if(!cart.length){toast('Your cart is empty');return}
+      if(!requireLogin('checking out')) return;
       closeCart(); renderCheckout();
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.getElementById('checkoutView').classList.add('active');
       document.querySelector('main').style.minHeight='0';
-      window.scrollTo({top:0,behavior:'smooth'});
+      window.scrollTo(0,0); document.documentElement.scrollTop=0; document.body.scrollTop=0;
+      setTimeout(()=>window.scrollTo(0,0),50);
     }
     function placeBuyOrder(){
+      if(!requireLogin('placing a Buy order')) return;
       const name=document.getElementById('buyerName').value.trim();
       const phone=document.getElementById('buyerPhone').value.trim();
       const address=document.getElementById('buyerAddress').value.trim();
@@ -558,7 +640,7 @@
       showView('home');
     }
 
-    document.addEventListener('DOMContentLoaded',()=>{renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();renderOrderHistory();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
+    document.addEventListener('DOMContentLoaded',()=>{renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();renderOrderHistory();updateAccountUI();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
   </script>
 
 <footer class="founder-footer"><div class="founder-card"><div class="founder-badge">FM</div><div class="founder-content"><p class="founder-label">ABOUT THE FOUNDER</p><h2>Built by Asikur Rahaman</h2><p>Fasal Mandi is built with a simple goal: to help farmers get a fair, transparent price for their agricultural products and connect them with better markets.</p><div class="founder-contact"><a href="mailto:asikur591@gmail.com">✉ asikur591@gmail.com</a><a href="tel:+917908059105">☎ +91 79080 59105</a></div></div></div><p class="footer-copy">© 2026 Fasal Mandi · Farmer first, fairer markets.</p></footer><style>.founder-footer{margin-top:60px;padding:28px 20px 22px;background:#10281d;color:#fff}.founder-card{max-width:1050px;margin:auto;display:flex;gap:20px;align-items:center}.founder-badge{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#d9a441;color:#10281d;display:grid;place-items:center;font-weight:800;font-size:20px}.founder-label{margin:0 0 5px;font-size:11px;letter-spacing:1.5px;opacity:.7}.founder-content h2{margin:0 0 8px;font-size:22px}.founder-content p{margin:0 0 12px;line-height:1.55;color:#dce8df}.founder-contact{display:flex;gap:18px;flex-wrap:wrap}.founder-contact a{color:#fff;text-decoration:none;font-weight:600}.footer-copy{max-width:1050px;margin:20px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#aebfb3}@media(max-width:600px){.founder-card{align-items:flex-start}.founder-content h2{font-size:19px}.founder-contact{gap:10px;flex-direction:column}}</style>
