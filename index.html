@@ -119,7 +119,7 @@
     .order-step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;position:relative}
     .order-step .num{width:36px;height:36px;border-radius:11px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:13px}
     .order-step h3{margin:0 0 6px;font-size:17px}.order-step p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
-    .checkout-view{display:none}.checkout-view.active{display:block}
+    .checkout-view{display:none}.checkout-view.active{display:block}.checkout-view .page{padding-top:28px}.cart-qty{display:flex;align-items:center;gap:6px}.cart-qty button{border:1px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;font-weight:900;color:var(--primary-dark)}.cart-qty span{min-width:20px;text-align:center;font-weight:800}.order-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.tool-btn{border:1px solid var(--line);background:#fff;color:var(--primary-dark);padding:11px 14px;border-radius:12px;font-weight:800}.tool-btn.primary-tool{background:var(--primary);color:#fff;border-color:var(--primary)}.history-panel,.account-panel{display:none;margin-top:18px}.history-panel.open,.account-panel.open{display:block}.history-list{display:grid;gap:10px}.history-item{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfdf9}.history-item b{display:block}.history-item small{color:var(--muted);line-height:1.5}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.account-box{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfdf9}.account-box h4{margin:0 0 6px}.account-box p{margin:0 0 12px;color:var(--muted);font-size:12px}.account-box input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#fff}.account-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
     .checkout-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
     .checkout-card{padding:25px}.checkout-card h3{margin:0 0 5px;font-size:24px}.checkout-card>p{margin:0 0 20px;color:var(--muted)}
     .payment-options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 18px}
@@ -232,6 +232,29 @@
             <article class="order-step"><div class="num">2</div><h3>Place your order</h3><p>Enter quantity and contact details. Farmers get a pickup request; buyers get a checkout page.</p></article>
             <article class="order-step"><div class="num">3</div><h3>We complete it</h3><p>Our team arranges collection or delivery and confirms the final order and payment.</p></article>
           </div>
+          <div class="order-tools">
+            <button class="tool-btn" onclick="toggleOrderHistory()">📦 Order History</button>
+            <button class="tool-btn" onclick="openCart()">🛒 Cart <span id="homeCartCount">0</span></button>
+            <button class="tool-btn primary-tool" onclick="toggleAccount()">👤 Login / Sign up</button>
+          </div>
+          <div id="historyPanel" class="history-panel">
+            <div class="panel" style="padding:18px">
+              <h3 style="margin:0 0 6px">Your order history</h3>
+              <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Orders placed on this device are shown here.</p>
+              <div id="historyList" class="history-list"></div>
+            </div>
+          </div>
+          <div id="accountPanel" class="account-panel">
+            <div class="panel" style="padding:18px">
+              <h3 style="margin:0 0 6px">Your Fasal Mandi account</h3>
+              <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Login and sign-up can be added. For now this is a simple prototype stored on this device.</p>
+              <div class="account-grid">
+                <div class="account-box"><h4>Login</h4><p>Use your mobile number and password.</p><input id="loginPhone" type="tel" placeholder="Mobile number"><input id="loginPassword" type="password" placeholder="Password"><button class="primary" onclick="demoLogin()">Login</button></div>
+                <div class="account-box"><h4>Sign up</h4><p>Create a basic account on this device.</p><input id="signupName" placeholder="Full name"><input id="signupPhone" type="tel" placeholder="Mobile number"><input id="signupPassword" type="password" placeholder="Password"><button class="primary" onclick="demoSignup()">Sign up</button></div>
+              </div>
+              <div class="account-note">For a real customer login system that works across devices, we should later connect Firebase, Supabase, or another secure authentication service. Do not store real passwords in plain localStorage.</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -334,6 +357,7 @@
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.querySelectorAll('.checkout-view').forEach(v=>v.classList.remove('active'));
       document.getElementById(view+'View').classList.add('active');
+      document.querySelector('main').style.minHeight='calc(100vh - 120px)';
       window.scrollTo({top:0,behavior:'smooth'});
       if(view==='buy') renderProducts();
       if(window.innerWidth<=950) document.querySelector('.navlinks').style.display='none';
@@ -385,7 +409,12 @@
         landmark:document.getElementById('landmark').value.trim(),
         submittedAt:new Date().toISOString()
       };
-      try{localStorage.setItem('lastFasalMandiOrder',JSON.stringify(requestData));}catch(e){}
+      try{
+        localStorage.setItem('lastFasalMandiOrder',JSON.stringify(requestData));
+        const history=getSavedOrders();
+        history.unshift({...requestData,orderType:'SELL',items:[{name:selectedProduct,quantity:qty}],total:'—',paymentMethod:'SELL REQUEST'});
+        localStorage.setItem('fasalMandiOrderHistory',JSON.stringify(history.slice(0,20)));
+      }catch(e){}
 
       // Save the request to your Google Sheet when the Web App URL is configured.
       if(GOOGLE_SHEET_WEB_APP_URL && !GOOGLE_SHEET_WEB_APP_URL.includes('PASTE_YOUR_')){
@@ -422,10 +451,10 @@
     }
     function addToCart(id){const p=products.find(x=>x.id===id);const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({id,qty:1});updateCart();toast(`${p.name} added to cart`)}
     function updateCart(){
-      const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;document.getElementById('cartCount2').textContent=count;
+      const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;document.getElementById('cartCount2').textContent=count;document.getElementById('homeCartCount').textContent=count;
       const box=document.getElementById('cartItems');
       if(!cart.length){box.innerHTML='<div class="empty" style="padding:35px 5px">Your cart is empty.<br/>Add Farmer\'s Choice products to continue.</div>';document.getElementById('cartTotal').textContent='₹0';return}
-      let total=0;box.innerHTML=cart.map(item=>{const p=products.find(x=>x.id===item.id);total+=p.price*item.qty;return `<div class="cart-item"><div class="cart-thumb">${p.icon}</div><div><b>${p.name}</b><small>₹${p.price} × ${item.qty}</small></div><button class="close" style="width:32px;height:32px" onclick="removeCart(${p.id})">−</button></div>`}).join('');document.getElementById('cartTotal').textContent='₹'+total.toLocaleString('en-IN');
+      let total=0;box.innerHTML=cart.map(item=>{const p=products.find(x=>x.id===item.id);total+=p.price*item.qty;return `<div class="cart-item"><div class="cart-thumb">${p.icon}</div><div><b>${p.name}</b><small>₹${p.price} each</small></div><div class="cart-qty"><button onclick="removeCart(${p.id})" aria-label="Decrease quantity">−</button><span>${item.qty}</span><button onclick="addToCart(${p.id})" aria-label="Increase quantity">+</button></div></div>`}).join('');document.getElementById('cartTotal').textContent='₹'+total.toLocaleString('en-IN');
     }
     function removeCart(id){const i=cart.findIndex(x=>x.id===id);if(i<0)return;cart[i].qty--;if(cart[i].qty<=0)cart.splice(i,1);updateCart()}
     function openCart(){document.getElementById('cartDrawer').classList.add('open');updateCart()}
@@ -447,11 +476,54 @@
       document.getElementById('upiOption').classList.toggle('selected',method==='UPI');
       document.getElementById('upiNote').style.display=method==='UPI'?'block':'none';
     }
+    function getSavedOrders(){
+      try{
+        const orders=JSON.parse(localStorage.getItem('fasalMandiOrderHistory')||'[]');
+        return Array.isArray(orders)?orders:[];
+      }catch(e){return [];}
+    }
+    function renderOrderHistory(){
+      const box=document.getElementById('historyList');
+      const orders=getSavedOrders();
+      if(!orders.length){box.innerHTML='<div class="empty" style="padding:25px 5px">No orders yet. Your completed Buy orders will appear here.</div>';return;}
+      box.innerHTML=orders.map(o=>{
+        const isSell=o.orderType==='SELL';
+        const itemText=Array.isArray(o.items)?o.items.map(i=>i.name+' × '+i.quantity).join(' | '):(o.product+' × '+o.quantity+' '+(o.unit||''));
+        const totalText=isSell?'Pickup request':'₹'+Number(o.total||0).toLocaleString('en-IN');
+        const method=isSell?'🌾 Sell request':(o.paymentMethod==='COD'?'💵 Cash on Delivery':'📱 UPI');
+        return `<div class="history-item"><b>${o.orderId} · ${method}</b><small>${itemText}<br>${isSell?'Pickup area: '+(o.village||'—'):'Total: '+totalText}<br>${new Date(o.submittedAt||Date.now()).toLocaleString('en-IN')}</small></div>`;
+      }).join('');
+    }
+    function toggleOrderHistory(){
+      const p=document.getElementById('historyPanel');
+      p.classList.toggle('open');
+      document.getElementById('accountPanel').classList.remove('open');
+      if(p.classList.contains('open')){renderOrderHistory();p.scrollIntoView({behavior:'smooth',block:'nearest'});}
+    }
+    function toggleAccount(){
+      const p=document.getElementById('accountPanel');
+      p.classList.toggle('open');
+      document.getElementById('historyPanel').classList.remove('open');
+      if(p.classList.contains('open'))p.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function demoSignup(){
+      const name=document.getElementById('signupName').value.trim(),phone=document.getElementById('signupPhone').value.trim(),password=document.getElementById('signupPassword').value;
+      if(!name||phone.replace(/\D/g,'').length<10||!password){toast('Please complete sign up details');return;}
+      try{localStorage.setItem('fasalMandiDemoAccount',JSON.stringify({name,phone}));}catch(e){}
+      toast('Demo account created on this device');
+    }
+    function demoLogin(){
+      const phone=document.getElementById('loginPhone').value.trim(),password=document.getElementById('loginPassword').value;
+      let account=null;try{account=JSON.parse(localStorage.getItem('fasalMandiDemoAccount')||'null')}catch(e){}
+      if(account&&account.phone===phone&&password){toast('Demo login successful');}else{toast('Demo account not found — sign up first');}
+    }
+
     function checkout(){
       if(!cart.length){toast('Your cart is empty');return}
       closeCart(); renderCheckout();
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.getElementById('checkoutView').classList.add('active');
+      document.querySelector('main').style.minHeight='0';
       window.scrollTo({top:0,behavior:'smooth'});
     }
     function placeBuyOrder(){
@@ -471,7 +543,10 @@
         orderType:'BUY',orderId,customerName:name,phone,address,
         paymentMethod:selectedPayment,items,total,submittedAt:new Date().toISOString()
       };
-      try{localStorage.setItem('lastFasalMandiBuyOrder',JSON.stringify(data));}catch(e){}
+      try{
+        localStorage.setItem('lastFasalMandiBuyOrder',JSON.stringify(data));
+        const history=getSavedOrders(); history.unshift(data); localStorage.setItem('fasalMandiOrderHistory',JSON.stringify(history.slice(0,20)));
+      }catch(e){}
       if(GOOGLE_SHEET_WEB_APP_URL && !GOOGLE_SHEET_WEB_APP_URL.includes('PASTE_YOUR_')){
         try{fetch(GOOGLE_SHEET_WEB_APP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data),keepalive:true});}catch(e){}
       }
@@ -483,7 +558,7 @@
       showView('home');
     }
 
-    document.addEventListener('DOMContentLoaded',()=>{renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
+    document.addEventListener('DOMContentLoaded',()=>{renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();renderOrderHistory();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
   </script>
 
 <footer class="founder-footer"><div class="founder-card"><div class="founder-badge">FM</div><div class="founder-content"><p class="founder-label">ABOUT THE FOUNDER</p><h2>Built by Asikur Rahaman</h2><p>Fasal Mandi is built with a simple goal: to help farmers get a fair, transparent price for their agricultural products and connect them with better markets.</p><div class="founder-contact"><a href="mailto:asikur591@gmail.com">✉ asikur591@gmail.com</a><a href="tel:+917908059105">☎ +91 79080 59105</a></div></div></div><p class="footer-copy">© 2026 Fasal Mandi · Farmer first, fairer markets.</p></footer><style>.founder-footer{margin-top:60px;padding:28px 20px 22px;background:#10281d;color:#fff}.founder-card{max-width:1050px;margin:auto;display:flex;gap:20px;align-items:center}.founder-badge{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#d9a441;color:#10281d;display:grid;place-items:center;font-weight:800;font-size:20px}.founder-label{margin:0 0 5px;font-size:11px;letter-spacing:1.5px;opacity:.7}.founder-content h2{margin:0 0 8px;font-size:22px}.founder-content p{margin:0 0 12px;line-height:1.55;color:#dce8df}.founder-contact{display:flex;gap:18px;flex-wrap:wrap}.founder-contact a{color:#fff;text-decoration:none;font-weight:600}.footer-copy{max-width:1050px;margin:20px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#aebfb3}@media(max-width:600px){.founder-card{align-items:flex-start}.founder-content h2{font-size:19px}.founder-contact{gap:10px;flex-direction:column}}</style>
