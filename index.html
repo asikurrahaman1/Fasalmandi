@@ -132,6 +132,21 @@
     .history-menu{border-top:1px solid var(--line)!important;margin-top:4px!important;padding-top:14px!important}
     .navlinks .account-menu{box-shadow:0 8px 18px rgba(47,107,58,.16)}
     .navlinks .cart-btn{border-color:#dfe8da!important}
+    .navlinks .menu-link{display:flex;align-items:center;gap:10px;width:100%;border:1px solid transparent;background:transparent;color:var(--ink);padding:13px 14px;border-radius:14px;font-weight:800;text-align:left}
+    .navlinks .menu-link:hover{background:#f2f7ed;border-color:var(--line)}
+    .navlinks .menu-link .menu-icon{width:34px;height:34px;border-radius:10px;background:#eef5e9;display:grid;place-items:center;flex:0 0 34px;font-size:18px}
+    .navlinks .menu-link.account-menu{background:var(--primary)!important;color:#fff!important;border-color:var(--primary)!important}
+    .navlinks .menu-link.account-menu:hover{background:var(--primary-dark)!important}
+    .navlinks .menu-link.account-menu .menu-icon{background:rgba(255,255,255,.16);color:#fff}
+    .navlinks .menu-link .menu-copy{display:flex;flex-direction:column;line-height:1.15}
+    .navlinks .menu-link .menu-copy small{font-size:10px;opacity:.72;font-weight:700;margin-top:3px}
+    .navlinks .cart-btn{justify-content:space-between}
+    .navlinks .cart-btn .cart-left{display:flex;align-items:center;gap:10px}
+    .navlinks .cart-btn .menu-icon{background:#edf5e8}
+    .account-welcome{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);background:#fff;border-radius:16px;margin-bottom:14px}
+    .account-avatar{width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:900}
+    .account-welcome strong{display:block}.account-welcome span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+    .logged-account-actions{display:flex;gap:10px;flex-wrap:wrap}
 
     .checkout-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
     .checkout-card{padding:25px}.checkout-card h3{margin:0 0 5px;font-size:24px}.checkout-card>p{margin:0 0 20px;color:var(--muted)}
@@ -160,11 +175,22 @@
           <div class="brand-text">Fasal Mandi<small>by Farmer's Choice</small></div>
         </button>
         <div class="navlinks">
-          <button class="mobile-menu-item account-menu" onclick="openAccountFromMenu()">👤 Sign up / Login</button>
-          <button onclick="showView('buy')">🛍️ Buy Products</button>
-          <button onclick="showView('sell')">🌾 Sell Grain</button>
-          <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="badge" id="cartCount">0</span></button>
-          <button class="mobile-menu-item history-menu" onclick="openOrderHistoryFromMenu()">📦 Order History</button>
+          <button class="mobile-menu-item menu-link account-menu" id="accountMenuBtn" onclick="openAccountFromMenu()">
+            <span class="menu-icon">👤</span><span class="menu-copy"><span id="accountMenuTitle">Sign up / Login</span><small id="accountMenuSub">Account required to place orders</small></span>
+          </button>
+          <button class="mobile-menu-item menu-link" onclick="showView('buy')">
+            <span class="menu-icon">🛍️</span><span class="menu-copy"><span>Buy Products</span><small>Shop Farmer's Choice</small></span>
+          </button>
+          <button class="mobile-menu-item menu-link" onclick="showView('sell')">
+            <span class="menu-icon">🌾</span><span class="menu-copy"><span>Sell Grain</span><small>List your harvest</small></span>
+          </button>
+          <button class="mobile-menu-item menu-link cart-btn" onclick="openCart()">
+            <span class="cart-left"><span class="menu-icon">🛒</span><span class="menu-copy"><span>Cart</span><small>Review your items</small></span></span>
+            <span class="badge" id="cartCount">0</span>
+          </button>
+          <button class="mobile-menu-item menu-link history-menu" onclick="openOrderHistoryFromMenu()">
+            <span class="menu-icon">📦</span><span class="menu-copy"><span>Order History</span><small>Your orders & requests</small></span>
+          </button>
         </div>
         <button class="menu" onclick="toggleMobileMenu()">☰</button>
       </nav>
@@ -288,7 +314,7 @@
     <section id="historyView" class="view">
       <div class="shell page">
         <div class="section-head">
-          <div><button class="back" onclick="showView('home')">← Back to home</button><h2 style="margin-top:18px">Order history</h2><p>Your recent Buy orders and Sell requests.</p></div>
+          <div><button class="back" onclick="showView('home')">← Back to home</button><h2 style="margin-top:18px">Order history</h2><p id="historySubtitle">Your recent Buy orders and Sell requests.</p></div>
         </div>
         <div class="panel history-page-card">
           <div class="history-page-head">
@@ -306,8 +332,19 @@
         </div>
         <div class="panel account-page-card">
           <div id="accountLoggedIn" class="account-status" style="display:none"></div>
-          <button class="secondary-btn" onclick="logoutAccount()" style="display:none" id="logoutBtn">Logout</button>
-          <div class="account-grid">
+          <div id="loggedAccountPanel" style="display:none">
+            <div class="account-welcome">
+              <div class="account-avatar" id="accountAvatar">FM</div>
+              <div><strong id="accountWelcomeName">Welcome</strong><span id="accountWelcomePhone">Your Fasal Mandi account</span></div>
+            </div>
+            <div class="logged-account-actions">
+              <button class="primary" onclick="showView('buy')">🛍️ Shop products</button>
+              <button class="secondary-btn" onclick="showView('sell')">🌾 Sell grain</button>
+              <button class="secondary-btn" onclick="showView('history')">📦 Order history</button>
+              <button class="secondary-btn" onclick="logoutAccount()" id="logoutBtn">Logout</button>
+            </div>
+          </div>
+          <div class="account-grid" id="accountForms">
             <div class="account-box">
               <h4>Login</h4><p>Use your mobile number and password.</p>
               <input id="loginPhone" type="tel" inputmode="numeric" placeholder="Mobile number">
@@ -557,6 +594,9 @@
     }
     function renderOrderHistory(){
       const box=document.getElementById('historyList');
+      const subtitle=document.getElementById('historySubtitle');
+      const account=getCurrentAccount();
+      if(subtitle) subtitle.textContent=account ? ('Recent activity for '+account.name+'. Your orders stay on this device in this free prototype.') : 'Your recent Buy orders and Sell requests.';
       const orders=getSavedOrders();
       if(!orders.length){box.innerHTML='<div class="empty" style="padding:25px 5px">No orders yet. Your Buy orders and Sell requests will appear here.</div>';return;}
       box.innerHTML=orders.map(o=>{
@@ -568,22 +608,64 @@
       }).join('');
     }
     function getCurrentAccount(){
-      try{return JSON.parse(localStorage.getItem('fasalMandiLoggedIn')||'null')}catch(e){return null;}
+      try{
+        const active=JSON.parse(localStorage.getItem('fasalMandiLoggedIn')||'null');
+        if(active && active.phone) return active;
+        // Keep the user signed in on this device unless they explicitly logged out.
+        const remembered=JSON.parse(localStorage.getItem('fasalMandiDemoAccount')||'null');
+        const loggedOut=localStorage.getItem('fasalMandiLoggedOut')==='1';
+        if(remembered && remembered.phone && !loggedOut){
+          const session={name:remembered.name,phone:remembered.phone};
+          localStorage.setItem('fasalMandiLoggedIn',JSON.stringify(session));
+          return session;
+        }
+      }catch(e){}
+      return null;
+    }
+    function getInitials(name){
+      const parts=String(name||'FM').trim().split(/\s+/).filter(Boolean);
+      return (parts.length>1 ? parts[0][0]+parts[parts.length-1][0] : parts[0].slice(0,2)).toUpperCase();
+    }
+    function updateMenuAccount(){
+      const account=getCurrentAccount();
+      const title=document.getElementById('accountMenuTitle');
+      const sub=document.getElementById('accountMenuSub');
+      if(!title||!sub) return;
+      if(account){
+        title.textContent='Hi, '+account.name;
+        sub.textContent='My account • Logged in';
+      }else{
+        title.textContent='Sign up / Login';
+        sub.textContent='Account required to place orders';
+      }
     }
     function updateAccountUI(){
       const account=getCurrentAccount();
       const status=document.getElementById('accountStatus');
       const logged=document.getElementById('accountLoggedIn');
-      const logout=document.getElementById('logoutBtn');
+      const forms=document.getElementById('accountForms');
+      const panel=document.getElementById('loggedAccountPanel');
+      const welcome=document.getElementById('accountWelcomeName');
+      const phone=document.getElementById('accountWelcomePhone');
+      const avatar=document.getElementById('accountAvatar');
+      const continueBtn=document.getElementById('continueOrderBtn');
       if(account){
-        if(logged){logged.style.display='inline-flex';logged.textContent='✓ Logged in as '+account.name;}
-        if(status) status.textContent='You are logged in. You can now place Buy and Sell orders.';
-        if(logout) logout.style.display='inline-block';
+        if(logged){logged.style.display='inline-flex';logged.textContent='✓ Logged in';}
+        if(forms) forms.style.display='none';
+        if(panel) panel.style.display='block';
+        if(welcome) welcome.textContent='Welcome, '+account.name;
+        if(phone) phone.textContent='Mobile: '+account.phone;
+        if(avatar) avatar.textContent=getInitials(account.name);
+        if(status) status.textContent='You are logged in on this device. You can place Buy and Sell orders without logging in again.';
+        if(continueBtn) continueBtn.style.display=getPendingAction()?'inline-block':'none';
       }else{
         if(logged) logged.style.display='none';
-        if(logout) logout.style.display='none';
-        if(status) status.textContent='Please log in or sign up before placing a Buy or Sell order. This version uses a local prototype account; a real multi-device login system can be connected later.';
+        if(forms) forms.style.display='grid';
+        if(panel) panel.style.display='none';
+        if(status) status.textContent='Please log in or sign up before placing a Buy or Sell order. Your login is remembered on this device.';
+        if(continueBtn) continueBtn.style.display='none';
       }
+      updateMenuAccount();
     }
     function setPendingAction(action){
       try{localStorage.setItem('fasalMandiPendingAction',action)}catch(e){}
@@ -610,6 +692,7 @@
       try{
         localStorage.setItem('fasalMandiDemoAccount',JSON.stringify(account));
         localStorage.setItem('fasalMandiLoggedIn',JSON.stringify({name,phone}));
+        localStorage.removeItem('fasalMandiLoggedOut');
       }catch(e){}
       document.getElementById('signupPassword').value='';
       document.getElementById('loginPassword').value='';
@@ -625,6 +708,7 @@
       if(!account){toast('Account not found — please sign up first');return;}
       if(account.phone===phone&&account.password===password){
         localStorage.setItem('fasalMandiLoggedIn',JSON.stringify({name:account.name,phone:account.phone}));
+        localStorage.removeItem('fasalMandiLoggedOut');
         document.getElementById('loginPassword').value='';
         updateAccountUI();
         toast('Login successful');
@@ -647,8 +731,9 @@
     }
     function logoutAccount(){
       localStorage.removeItem('fasalMandiLoggedIn');
+      localStorage.setItem('fasalMandiLoggedOut','1');
       updateAccountUI();
-      toast('Logged out');
+      toast('Logged out on this device');
     }
 
     function checkout(){
@@ -694,7 +779,7 @@
       showView('home');
     }
 
-    document.addEventListener('DOMContentLoaded',()=>{renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();renderOrderHistory();updateAccountUI();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
+    document.addEventListener('DOMContentLoaded',()=>{getCurrentAccount();renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();updateAccountUI();renderOrderHistory();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
   </script>
 
 <footer class="founder-footer"><div class="founder-card"><div class="founder-badge">FM</div><div class="founder-content"><p class="founder-label">ABOUT THE FOUNDER</p><h2>Built by Asikur Rahaman</h2><p>Fasal Mandi is built with a simple goal: to help farmers get a fair, transparent price for their agricultural products and connect them with better markets.</p><div class="founder-contact"><a href="mailto:asikur591@gmail.com">✉ asikur591@gmail.com</a><a href="tel:+917908059105">☎ +91 79080 59105</a></div></div></div><p class="footer-copy">© 2026 Fasal Mandi · Farmer first, fairer markets.</p></footer><style>.founder-footer{margin-top:60px;padding:28px 20px 22px;background:#10281d;color:#fff}.founder-card{max-width:1050px;margin:auto;display:flex;gap:20px;align-items:center}.founder-badge{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#d9a441;color:#10281d;display:grid;place-items:center;font-weight:800;font-size:20px}.founder-label{margin:0 0 5px;font-size:11px;letter-spacing:1.5px;opacity:.7}.founder-content h2{margin:0 0 8px;font-size:22px}.founder-content p{margin:0 0 12px;line-height:1.55;color:#dce8df}.founder-contact{display:flex;gap:18px;flex-wrap:wrap}.founder-contact a{color:#fff;text-decoration:none;font-weight:600}.footer-copy{max-width:1050px;margin:20px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#aebfb3}@media(max-width:600px){.founder-card{align-items:flex-start}.founder-content h2{font-size:19px}.founder-contact{gap:10px;flex-direction:column}}</style>
