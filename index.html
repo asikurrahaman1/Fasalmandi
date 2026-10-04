@@ -40,7 +40,7 @@
     .navlinks button:hover{background:var(--secondary);color:var(--primary-dark)}
     .cart-btn{position:relative;border:1px solid var(--line)!important;background:#fff!important;color:var(--ink)!important;box-shadow:0 4px 16px rgba(25,45,30,.05)}
     .badge{position:absolute;right:-5px;top:-5px;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800}
-    .menu{display:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:12px}.mobile-menu-item{display:none}
+    .menu{display:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:12px}.mobile-menu-item{display:none}.account-menu{order:-1}.menu{transition:.2s}.menu:hover{background:var(--secondary)}
 
     main{min-height:calc(100vh - 120px)}
     .view{display:none}.view.active{display:block}
@@ -98,7 +98,8 @@
     .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#213b26;color:#fff;padding:12px 15px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:70;font-size:13px;box-shadow:0 10px 30px rgba(22,40,25,.2)}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     @media(max-width:950px){
-      .navlinks{display:none}.menu{display:block}.mobile-menu-item{display:block}
+      .navlinks{display:none}.menu{display:block}.mobile-menu-item{display:block}.navlinks.open{display:flex}
+      .navlinks button{width:100%;text-align:left;padding:12px 14px;border-radius:12px}.navlinks .cart-btn{justify-content:flex-start}
       .hero-grid,.sell-layout{grid-template-columns:1fr}.hero-visual{min-height:360px}.stepper{position:relative;top:auto}.steps{grid-template-columns:repeat(3,1fr)}.step{padding:10px}.products{grid-template-columns:repeat(2,1fr)}.trust-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:650px){
@@ -120,6 +121,18 @@
     .order-step .num{width:36px;height:36px;border-radius:11px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:13px}
     .order-step h3{margin:0 0 6px;font-size:17px}.order-step p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
     .checkout-view{display:none}.checkout-view.active{display:block}.checkout-view .page{padding-top:28px}.cart-qty{display:flex;align-items:center;gap:6px}.cart-qty button{border:1px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;font-weight:900;color:var(--primary-dark)}.cart-qty span{min-width:20px;text-align:center;font-weight:800}.order-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.tool-btn{border:1px solid var(--line);background:#fff;color:var(--primary-dark);padding:11px 14px;border-radius:12px;font-weight:800}.tool-btn.primary-tool{background:var(--primary);color:#fff;border-color:var(--primary)}.history-panel,.account-panel{display:none;margin-top:18px}.history-panel.open,.account-panel.open{display:block}.history-list{display:grid;gap:10px}.history-item{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfdf9}.history-item b{display:block}.history-item small{color:var(--muted);line-height:1.5}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.account-box{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfdf9}.account-box h4{margin:0 0 6px}.account-box p{margin:0 0 12px;color:var(--muted);font-size:12px}.account-box input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#fff}.account-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.account-status{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#e9f2df;color:var(--primary-dark);font-size:12px;font-weight:800;margin-bottom:12px}.login-required{padding:13px 14px;border:1px solid #ead9aa;background:#fff9e9;border-radius:13px;color:#765a1d;font-size:13px;line-height:1.5;margin-bottom:16px}
+
+    .navlinks .cart-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:13px;font-weight:800}
+    .history-page-card,.account-page-card{padding:24px;max-width:900px;margin:0 auto}
+    .history-page-head h3{font-size:24px;margin:12px 0 5px}.history-page-head p{margin:0 0 18px;color:var(--muted)}
+    .account-page-card{background:linear-gradient(135deg,#f4f9ef,#fffaf0)}
+    .account-page-card .account-grid{margin-top:16px}.continue-order-btn{margin-top:18px}
+    .account-menu{background:var(--primary)!important;color:#fff!important;border-radius:13px!important;padding:12px 15px!important}
+    .account-menu:hover{background:var(--primary-dark)!important}
+    .history-menu{border-top:1px solid var(--line)!important;margin-top:4px!important;padding-top:14px!important}
+    .navlinks .account-menu{box-shadow:0 8px 18px rgba(47,107,58,.16)}
+    .navlinks .cart-btn{border-color:#dfe8da!important}
+
     .checkout-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
     .checkout-card{padding:25px}.checkout-card h3{margin:0 0 5px;font-size:24px}.checkout-card>p{margin:0 0 20px;color:var(--muted)}
     .payment-options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 18px}
@@ -147,11 +160,11 @@
           <div class="brand-text">Fasal Mandi<small>by Farmer's Choice</small></div>
         </button>
         <div class="navlinks">
-          <button onclick="showView('sell')">Sell Grain</button>
-          <button onclick="showView('buy')">Buy Products</button>
-          <button class="cart-btn" onclick="openCart()">Cart <span class="badge" id="cartCount">0</span></button>
-          <button class="mobile-menu-item" onclick="openOrderHistoryFromMenu()">📦 Order History</button>
-          <button class="mobile-menu-item" onclick="openAccountFromMenu()">👤 Login / Sign up</button>
+          <button class="mobile-menu-item account-menu" onclick="openAccountFromMenu()">👤 Sign up / Login</button>
+          <button onclick="showView('buy')">🛍️ Buy Products</button>
+          <button onclick="showView('sell')">🌾 Sell Grain</button>
+          <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="badge" id="cartCount">0</span></button>
+          <button class="mobile-menu-item history-menu" onclick="openOrderHistoryFromMenu()">📦 Order History</button>
         </div>
         <button class="menu" onclick="toggleMobileMenu()">☰</button>
       </nav>
@@ -235,24 +248,6 @@
             <article class="order-step"><div class="num">3</div><h3>We complete it</h3><p>Our team arranges collection or delivery and confirms the final order and payment.</p></article>
           </div>
 
-          <div id="historyPanel" class="history-panel">
-            <div class="panel" style="padding:18px">
-              <h3 style="margin:0 0 6px">Your order history</h3>
-              <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Orders placed on this device are shown here.</p>
-              <div id="historyList" class="history-list"></div>
-            </div>
-          </div>
-          <div id="accountPanel" class="account-panel">
-            <div class="panel" style="padding:18px">
-              <h3 style="margin:0 0 6px">Your Fasal Mandi account</h3>
-              <p style="margin:0 0 14px;color:var(--muted);font-size:13px">A Fasal Mandi account is required to place a Buy or Sell order. You can browse products without logging in.</p>
-              <div id="accountLoggedIn" class="account-status" style="display:none">✓ Logged in</div><button class="secondary-btn" onclick="logoutAccount()" style="display:none" id="logoutBtn">Logout</button><div class="account-grid">
-                <div class="account-box"><h4>Login</h4><p>Use your mobile number and password.</p><input id="loginPhone" type="tel" placeholder="Mobile number"><input id="loginPassword" type="password" placeholder="Password"><button class="primary" onclick="demoLogin()">Login</button></div>
-                <div class="account-box"><h4>Sign up</h4><p>Create a basic account on this device.</p><input id="signupName" placeholder="Full name"><input id="signupPhone" type="tel" placeholder="Mobile number"><input id="signupPassword" type="password" placeholder="Password"><button class="primary" onclick="demoSignup()">Sign up</button></div>
-              </div>
-              <div id="accountStatus" class="account-note">Please log in or sign up before placing a Buy or Sell order. This version uses a local prototype account; a real multi-device login system can be connected later.</div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -289,6 +284,50 @@
         </div>
       </div>
     </section>
+
+    <section id="historyView" class="view">
+      <div class="shell page">
+        <div class="section-head">
+          <div><button class="back" onclick="showView('home')">← Back to home</button><h2 style="margin-top:18px">Order history</h2><p>Your recent Buy orders and Sell requests.</p></div>
+        </div>
+        <div class="panel history-page-card">
+          <div class="history-page-head">
+            <div><span class="mini-badge">📦 Your orders</span><h3>Recent activity</h3><p>Orders and pickup requests placed from this device are shown here.</p></div>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="accountView" class="view">
+      <div class="shell page">
+        <div class="section-head">
+          <div><button class="back" onclick="showView('home')">← Back to home</button><h2 style="margin-top:18px">Your Fasal Mandi account</h2><p>Login or create an account before placing a Buy or Sell order.</p></div>
+        </div>
+        <div class="panel account-page-card">
+          <div id="accountLoggedIn" class="account-status" style="display:none"></div>
+          <button class="secondary-btn" onclick="logoutAccount()" style="display:none" id="logoutBtn">Logout</button>
+          <div class="account-grid">
+            <div class="account-box">
+              <h4>Login</h4><p>Use your mobile number and password.</p>
+              <input id="loginPhone" type="tel" inputmode="numeric" placeholder="Mobile number">
+              <input id="loginPassword" type="password" placeholder="Password">
+              <button class="primary" onclick="demoLogin()">Login</button>
+            </div>
+            <div class="account-box">
+              <h4>Sign up</h4><p>Create your Fasal Mandi account on this device.</p>
+              <input id="signupName" placeholder="Full name">
+              <input id="signupPhone" type="tel" inputmode="numeric" placeholder="Mobile number">
+              <input id="signupPassword" type="password" placeholder="Password">
+              <button class="primary" onclick="demoSignup()">Sign up</button>
+            </div>
+          </div>
+          <div id="accountStatus" class="account-note">Login is required before you can complete a Buy checkout or submit a Sell request.</div>
+          <button id="continueOrderBtn" class="primary continue-order-btn" style="display:none" onclick="continueAfterLogin()">Continue to order →</button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div class="cart-drawer" id="cartDrawer"><div class="shade" onclick="closeCart()"></div><aside class="drawer"><div class="drawer-head"><h3>Your cart</h3><button class="close" onclick="closeCart()">✕</button></div><div class="cart-items" id="cartItems"></div><div class="cart-footer"><div class="total"><span>Total</span><span id="cartTotal">₹0</span></div><button class="checkout" onclick="checkout()">Proceed to checkout</button></div></aside></div>
@@ -354,47 +393,50 @@
     function showView(view){
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.querySelectorAll('.checkout-view').forEach(v=>v.classList.remove('active'));
-      document.getElementById(view+'View').classList.add('active');
+      const target=document.getElementById(view+'View');
+      if(!target) return;
+      target.classList.add('active');
       document.querySelector('main').style.minHeight='calc(100vh - 120px)';
       window.scrollTo({top:0,behavior:'smooth'});
       if(view==='buy') renderProducts();
-      if(window.innerWidth<=950) document.querySelector('.navlinks').style.display='none';
+      if(view==='history') renderOrderHistory();
+      if(view==='account') updateAccountUI();
+      closeMobileMenu();
     }
     function toggleMobileMenu(){
       const n=document.querySelector('.navlinks');
-      n.style.display=n.style.display==='flex'?'none':'flex';
-      if(n.style.display==='flex'){
-        n.style.position='absolute';
-        n.style.top='70px';
-        n.style.right='12px';
-        n.style.background='#fff';
-        n.style.padding='10px';
-        n.style.border='1px solid var(--line)';
-        n.style.borderRadius='16px';
-        n.style.flexDirection='column';
-        n.style.boxShadow='var(--shadow)';
-      }
+      if(n.classList.contains('open')){closeMobileMenu();return;}
+      n.classList.add('open');
+      n.style.position='absolute';
+      n.style.top='70px';
+      n.style.right='12px';
+      n.style.background='#fff';
+      n.style.padding='10px';
+      n.style.width='min(290px, calc(100vw - 24px))';
+      n.style.zIndex='40';
+      n.style.border='1px solid var(--line)';
+      n.style.borderRadius='18px';
+      n.style.flexDirection='column';
+      n.style.boxShadow='0 18px 45px rgba(26,47,29,.14)';
     }
     function closeMobileMenu(){
       const n=document.querySelector('.navlinks');
-      if(window.innerWidth<=950) n.style.display='none';
+      n.classList.remove('open');
+      if(window.innerWidth<=950) n.style.display='';
     }
     function openOrderHistoryFromMenu(){
       closeMobileMenu();
-      showView('home');
-      const p=document.getElementById('historyPanel');
-      document.getElementById('accountPanel').classList.remove('open');
-      p.classList.add('open');
-      renderOrderHistory();
-      setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),100);
+      if(!getCurrentAccount()){
+        localStorage.setItem('fasalMandiPendingAction','history');
+        showView('account');
+        toast('Please Login / Sign up to view order history');
+        return;
+      }
+      showView('history');
     }
     function openAccountFromMenu(){
       closeMobileMenu();
-      showView('home');
-      const p=document.getElementById('accountPanel');
-      document.getElementById('historyPanel').classList.remove('open');
-      p.classList.add('open');
-      setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),100);
+      showView('account');
     }
     function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
     function renderProductOptions(){
@@ -416,7 +458,7 @@
       document.getElementById('sellProgress').style.width=(sellStep===4?'100':sellStep*33.333)+'%';
     }
     function placeSellOrder(){
-      if(!requireLogin('placing a Sell order')) return;
+      if(!requireLogin('placing a Sell order','sell')) return;
       const name=document.getElementById('farmerName').value.trim(), phone=document.getElementById('phone').value.trim(), village=document.getElementById('village').value.trim(), qty=document.getElementById('quantity').value.trim();
       if(!name||!phone||!village||!qty){toast('Please complete the required fields');return}
       if(phone.replace(/\D/g,'').length<10){toast('Please enter a valid mobile number');return}
@@ -516,7 +558,7 @@
     function renderOrderHistory(){
       const box=document.getElementById('historyList');
       const orders=getSavedOrders();
-      if(!orders.length){box.innerHTML='<div class="empty" style="padding:25px 5px">No orders yet. Your completed Buy orders will appear here.</div>';return;}
+      if(!orders.length){box.innerHTML='<div class="empty" style="padding:25px 5px">No orders yet. Your Buy orders and Sell requests will appear here.</div>';return;}
       box.innerHTML=orders.map(o=>{
         const isSell=o.orderType==='SELL';
         const itemText=Array.isArray(o.items)?o.items.map(i=>i.name+' × '+i.quantity).join(' | '):(o.product+' × '+o.quantity+' '+(o.unit||''));
@@ -524,18 +566,6 @@
         const method=isSell?'🌾 Sell request':(o.paymentMethod==='COD'?'💵 Cash on Delivery':'📱 UPI');
         return `<div class="history-item"><b>${o.orderId} · ${method}</b><small>${itemText}<br>${isSell?'Pickup area: '+(o.village||'—'):'Total: '+totalText}<br>${new Date(o.submittedAt||Date.now()).toLocaleString('en-IN')}</small></div>`;
       }).join('');
-    }
-    function toggleOrderHistory(){
-      const p=document.getElementById('historyPanel');
-      p.classList.toggle('open');
-      document.getElementById('accountPanel').classList.remove('open');
-      if(p.classList.contains('open')){renderOrderHistory();p.scrollIntoView({behavior:'smooth',block:'nearest'});}
-    }
-    function toggleAccount(){
-      const p=document.getElementById('accountPanel');
-      p.classList.toggle('open');
-      document.getElementById('historyPanel').classList.remove('open');
-      if(p.classList.contains('open'))p.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
     function getCurrentAccount(){
       try{return JSON.parse(localStorage.getItem('fasalMandiLoggedIn')||'null')}catch(e){return null;}
@@ -555,10 +585,20 @@
         if(status) status.textContent='Please log in or sign up before placing a Buy or Sell order. This version uses a local prototype account; a real multi-device login system can be connected later.';
       }
     }
-    function requireLogin(action){
+    function setPendingAction(action){
+      try{localStorage.setItem('fasalMandiPendingAction',action)}catch(e){}
+    }
+    function getPendingAction(){
+      try{return localStorage.getItem('fasalMandiPendingAction')||''}catch(e){return ''}
+    }
+    function clearPendingAction(){
+      try{localStorage.removeItem('fasalMandiPendingAction')}catch(e){}
+    }
+    function requireLogin(action, pending){
       if(getCurrentAccount()) return true;
+      if(pending) setPendingAction(pending);
       toast('Please Login / Sign up before '+action);
-      openAccountFromMenu();
+      showView('account');
       return false;
     }
     function demoSignup(){
@@ -575,6 +615,7 @@
       document.getElementById('loginPassword').value='';
       updateAccountUI();
       toast('Account created. You are now logged in.');
+      setTimeout(continueAfterLogin,250);
     }
     function demoLogin(){
       const phone=document.getElementById('loginPhone').value.trim();
@@ -587,8 +628,21 @@
         document.getElementById('loginPassword').value='';
         updateAccountUI();
         toast('Login successful');
+        setTimeout(continueAfterLogin,250);
       }else{
         toast('Incorrect mobile number or password');
+      }
+    }
+    function continueAfterLogin(){
+      const pending=getPendingAction();
+      if(!pending) return;
+      clearPendingAction();
+      if(pending==='checkout'){
+        checkout();
+      }else if(pending==='sell'){
+        showView('sell');
+      }else if(pending==='history'){
+        showView('history');
       }
     }
     function logoutAccount(){
@@ -599,7 +653,7 @@
 
     function checkout(){
       if(!cart.length){toast('Your cart is empty');return}
-      if(!requireLogin('checking out')) return;
+      if(!requireLogin('checking out','checkout')) return;
       closeCart(); renderCheckout();
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.getElementById('checkoutView').classList.add('active');
@@ -608,7 +662,7 @@
       setTimeout(()=>window.scrollTo(0,0),50);
     }
     function placeBuyOrder(){
-      if(!requireLogin('placing a Buy order')) return;
+      if(!requireLogin('placing a Buy order','checkout')) return;
       const name=document.getElementById('buyerName').value.trim();
       const phone=document.getElementById('buyerPhone').value.trim();
       const address=document.getElementById('buyerAddress').value.trim();
