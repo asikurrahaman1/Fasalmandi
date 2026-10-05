@@ -1,10 +1,10 @@
-FASAL MANDI — UPDATED VERSION
+Fasal Mandi V8
 
-1. Upload index.html to your GitHub Fasalmandi repository and replace the old index.html.
-2. The website already contains your Google Apps Script Web App URL.
-3. IMPORTANT: replace the code in your Apps Script project with google-apps-script.gs, save it, then Deploy > Manage deployments > Edit > New version > Deploy.
-4. The script creates two tabs automatically:
-   - Sell Orders
-   - Buy Orders
-5. Buy checkout supports Cash on Delivery and a UPI option. Real UPI payments require your business UPI ID or a payment gateway.
-6. The website includes agriculture photos, a 3-step order section, cart Add buttons, and a checkout page.
+Replace the GitHub Pages index.html with this file. Google Apps Script does not need to be changed for the website to send the grand total; it will save data.total as the order total.
+
+Prototype checkout charges:
+- GST shown as 5%
+- Service fee ₹5
+- Delivery: ₹50 below ₹200; ₹40 for ₹200–299; ₹25 for ₹300–399; ₹10 for ₹400–499; FREE at ₹500+
+
+IMPORTANT: GST rates and actual product prices should be confirmed for your real business before launch.

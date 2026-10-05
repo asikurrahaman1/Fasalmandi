@@ -106,6 +106,25 @@
       .shell{width:min(calc(100% - 22px),var(--max))}.topbar{font-size:11px}.hero{padding:34px 0 26px}h1{font-size:46px}.hero-actions{grid-template-columns:1fr}.hero-visual{min-height:300px}.trust-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr 1fr}.field-grid,.summary{grid-template-columns:1fr}.field.full{grid-column:auto}.qty-row{grid-template-columns:1fr 120px}.form-card{padding:20px}.page{padding:28px 0 55px}.section-head{align-items:flex-start;flex-direction:column}.products{grid-template-columns:1fr 1fr;gap:11px}.product-img{height:130px}.product-body{padding:13px}.product-body h3{font-size:15px}.price b{font-size:18px}.add{padding:8px 10px}.foot{flex-direction:column;align-items:flex-start}.foot-links{flex-wrap:wrap}.mc2{right:10px}.mc1{left:10px}.mc3{left:10px}
     }
   
+
+    .shop-note{margin:-6px 0 18px;padding:12px 14px;border:1px dashed #d8e2d3;background:#f8fbf6;border-radius:14px;color:var(--muted);font-size:12px;line-height:1.5}
+    .product-img{height:205px;background:radial-gradient(circle at 25% 25%,#fff 0,#f5f8ef 42%,#e9efdF 100%);display:grid;place-items:center;position:relative;overflow:hidden}
+    .product-img::after{content:"";position:absolute;right:-34px;bottom:-42px;width:120px;height:120px;border-radius:50%;background:rgba(47,107,58,.07)}
+    .packshot{position:relative;width:132px;height:158px;filter:drop-shadow(0 14px 12px rgba(26,45,28,.14));z-index:2}
+    .packshot .pack-body{position:absolute;inset:7px 9px 2px;background:linear-gradient(145deg,var(--pack-main),var(--pack-dark));border:2px solid rgba(24,56,28,.16);border-radius:13px 13px 18px 18px;transform:skewY(-1.5deg)}
+    .packshot .pack-top{position:absolute;left:16px;right:16px;top:0;height:22px;background:linear-gradient(180deg,#dfe9d7,#bccdb5);border-radius:8px 8px 3px 3px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.08);z-index:3}
+    .packshot .brand-ribbon{position:absolute;left:19px;right:19px;top:28px;padding:6px 4px;background:#fffdf4;color:#24592f;border-radius:8px;text-align:center;font-size:9px;font-weight:900;letter-spacing:.08em;z-index:4;box-shadow:0 4px 7px rgba(0,0,0,.08)}
+    .packshot .pack-title{position:absolute;left:23px;right:23px;top:60px;color:#fff;text-align:center;font-size:10px;font-weight:900;line-height:1.18;text-transform:uppercase;z-index:4;text-shadow:0 1px 2px rgba(0,0,0,.16)}
+    .packshot .pack-icon{position:absolute;left:0;right:0;top:87px;text-align:center;font-size:34px;z-index:4}
+    .packshot .pack-size{position:absolute;left:28px;right:28px;bottom:14px;padding:5px 3px;background:rgba(255,255,255,.9);border-radius:999px;text-align:center;color:#27482b;font-size:9px;font-weight:900;z-index:4}
+    .packshot .pack-gloss{position:absolute;left:22px;top:19px;width:19px;height:113px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));opacity:.75;z-index:5;transform:rotate(4deg)}
+    .product-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.brand-mini{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;background:#edf5e8;border:1px solid #dce9d5;border-radius:999px;color:var(--primary-dark);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.unit-note{font-size:10px;color:var(--muted)}
+    .price-main{display:flex;align-items:baseline;gap:4px}.price-main b{font-size:21px}.price-main span{color:var(--muted);font-size:11px}.old-price{font-size:11px;color:#8a958c;text-decoration:line-through}
+    .charges{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;display:grid;gap:8px}.charge-row{display:flex;justify-content:space-between;gap:14px;font-size:13px;color:#5b665d}.charge-row strong{color:var(--ink)}.charge-row.total{padding-top:10px;margin-top:4px;border-top:1px dashed #dbe4d7;font-size:20px;color:var(--ink)}.free{color:var(--primary)!important;font-weight:900}
+    .checkout-note{padding:11px 13px;margin:12px 0 0;border-radius:12px;background:#eef6e8;border:1px solid #dcead3;color:#36563a;font-size:12px;line-height:1.5}
+    .founder-about-btn{display:inline-flex;align-items:center;gap:7px;margin-top:4px;padding:10px 13px;border-radius:12px;background:#fff;border:1px solid rgba(255,255,255,.16);color:#173d24!important;font-weight:900;box-shadow:0 6px 15px rgba(0,0,0,.08)}
+    @media(max-width:650px){.product-img{height:145px}.packshot{transform:scale(.78)}.product-meta{align-items:flex-start;flex-direction:column;gap:6px}.charge-row.total{font-size:18px}.founder-about-btn{width:max-content}}
+
     .photo-strip{padding:8px 0 64px}
     .photo-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px}
     .photo-card{position:relative;min-height:245px;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#dfead7}
@@ -305,7 +324,8 @@
       <div class="shell page">
         <div class="section-head"><div><button class="back" onclick="showView('home')">← Back</button><h2 style="margin-top:18px">Shop Farmer's Choice</h2><p>Quality grain and value-added products from our procurement network.</p></div><button class="primary" onclick="openCart()">View cart <span id="cartCount2">0</span></button></div>
         <div class="panel" style="padding:18px">
-          <div class="market-toolbar"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchBox" placeholder="Search rice, flour, paddy, wheat..." oninput="renderProducts()"/></div><div class="filters" id="filters"></div></div>
+          <div class="shop-note">All products are shown with a <b>FARMER'S CHOICE</b> branded pack design for your prototype. Add-to-cart is free to use; login is required at checkout.</div>
+          <div class="market-toolbar"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchBox" placeholder="Search rice, atta, oil, dal, paddy..." oninput="renderProducts()"/></div><div class="filters" id="filters"></div></div>
           <div class="products" id="products"></div>
         </div>
       </div>
@@ -396,7 +416,10 @@
           <h3>Your order</h3>
           <p>Review your selected Farmer's Choice products.</p>
           <div class="checkout-items" id="checkoutItems"></div>
-          <div class="checkout-total"><span>Total</span><span id="checkoutTotal">₹0</span></div>
+          <div class="charges" id="checkoutBreakdown"></div>
+          <div id="deliveryNote" class="checkout-note"></div>
+          <div class="checkout-total"><span>Grand total</span><span id="checkoutTotal">₹0</span></div>
+          <div class="helper" style="margin-top:10px">Prototype pricing: GST is currently shown as 5%. Confirm your applicable GST rate and product pricing before public launch.</div>
         </div>
       </div>
     </div>
@@ -409,21 +432,29 @@
     // Example: https://script.google.com/macros/s/XXXXXXXX/exec
     const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwDE4Gx-8y55cwoWbCO5w4iXpsm2lS3RuUVuHUTJR-WY7DrqTleMGxkgL5aZ2pAeK5q8g/exec';
     const productData = {
-      Paddy:{emoji:'🌾', varieties:['Miniket','Swarna','IR-36','Gobindobhog','Other']},
-      Wheat:{emoji:'🌾', varieties:['Lokwan','Sharbati','PBW','Local variety','Other']},
-      Mustard:{emoji:'🌼', varieties:['Black mustard','Yellow mustard','Local variety','Other']},
-      Maize:{emoji:'🌽', varieties:['Yellow maize','White maize','Local variety','Other']},
-      Other:{emoji:'🌱', varieties:['Local variety','Other']}
+      Paddy:{emoji:'🌾', varieties:['Miniket','Swarna','Swarna Sub-1','IR-36','IR-64','Gobindobhog','Lal Minikit','Banskati','Jaya','MTU-1010','Other']},
+      Wheat:{emoji:'🌾', varieties:['Lokwan','Sharbati','PBW-343','PBW-502','DBW-187','HD-2967','Local variety','Other']},
+      Mustard:{emoji:'🌼', varieties:['Black mustard','Yellow mustard','Toria','Pusa Bold','Varuna','Local variety','Other']},
+      Maize:{emoji:'🌽', varieties:['Yellow maize','White maize','Hybrid maize','Local variety','Other']},
+      Other:{emoji:'🌱', varieties:['Lentil','Moong','Masoor','Chana','Barley','Bajra','Jowar','Local variety','Other']}
     };
     const products = [
-      {id:1,name:'Swarna Raw Paddy',cat:'Raw Grain',icon:'🌾',unit:'quintal',price:2550,desc:'Clean paddy for rice mills and bulk buyers.'},
-      {id:2,name:'Miniket Premium Rice',cat:'Rice',icon:'🍚',unit:'kg',price:74,desc:'Everyday premium rice with consistent grain quality.'},
-      {id:3,name:'Stoneground Wheat Flour',cat:'Flour',icon:'🌾',unit:'kg',price:54,desc:'Freshly milled wheat flour for home and bulk use.'},
-      {id:4,name:'Cold-Pressed Mustard Oil',cat:'Oil',icon:'🫗',unit:'litre',price:158,desc:'A bold, traditional mustard oil for everyday cooking.'},
-      {id:5,name:'Premium Sharbati Wheat',cat:'Raw Grain',icon:'🌾',unit:'quintal',price:2920,desc:'Selected wheat for premium flour production.'},
-      {id:6,name:"Farmer's Choice Rice 5 kg",cat:'Rice',icon:'🍚',unit:'pack',price:365,desc:'Family pack from our direct procurement network.'},
-      {id:7,name:'Whole Wheat Atta 10 kg',cat:'Flour',icon:'🌾',unit:'pack',price:510,desc:'Soft atta made from carefully selected wheat.'},
-      {id:8,name:'Yellow Mustard Seed',cat:'Raw Grain',icon:'🌼',unit:'kg',price:93,desc:'Clean mustard seed for household or bulk use.'}
+      {id:1,name:'Swarna Raw Paddy',cat:'Raw Grain',icon:'🌾',unit:'quintal',price:2550,desc:'Clean paddy for rice mills and bulk buyers.',pack:'25 kg bag'},
+      {id:2,name:'Miniket Premium Rice',cat:'Rice',icon:'🍚',unit:'kg',price:74,desc:'Everyday premium rice with a clean, consistent grain.',pack:'1 kg packet'},
+      {id:3,name:"Farmer's Choice Miniket Rice 5 kg",cat:'Rice',icon:'🍚',unit:'pack',price:365,desc:'Popular family rice pack sourced through our farmer network.',pack:'5 kg packet'},
+      {id:4,name:"Farmer's Choice Gobindobhog Rice 5 kg",cat:'Rice',icon:'🍚',unit:'pack',price:520,desc:'Aromatic short-grain rice for festive and special meals.',pack:'5 kg packet'},
+      {id:5,name:"Farmer's Choice Sona Masoori Rice 5 kg",cat:'Rice',icon:'🍚',unit:'pack',price:330,desc:'Light, versatile rice for everyday cooking.',pack:'5 kg packet'},
+      {id:6,name:"Farmer's Choice Basmati Rice 5 kg",cat:'Rice',icon:'🍚',unit:'pack',price:590,desc:'Long-grain aromatic rice for biryani and premium dishes.',pack:'5 kg packet'},
+      {id:7,name:"Farmer's Choice Whole Wheat Atta 5 kg",cat:'Flour',icon:'🌾',unit:'pack',price:265,desc:'Freshly milled whole wheat atta for everyday rotis.',pack:'5 kg packet'},
+      {id:8,name:"Farmer's Choice Whole Wheat Atta 10 kg",cat:'Flour',icon:'🌾',unit:'pack',price:510,desc:'Family-size atta pack made from selected wheat.',pack:'10 kg packet'},
+      {id:9,name:"Farmer's Choice Mustard Oil 1 L",cat:'Oil',icon:'🫗',unit:'litre',price:158,desc:'Traditional mustard oil with a bold, rich flavour.',pack:'1 litre bottle'},
+      {id:10,name:"Farmer's Choice Mustard Oil 5 L",cat:'Oil',icon:'🫗',unit:'can',price:745,desc:'Value-size mustard oil for regular home kitchens.',pack:'5 litre can'},
+      {id:11,name:"Farmer's Choice Moong Dal 1 kg",cat:'Dal & Pulses',icon:'🫘',unit:'pack',price:155,desc:'Clean split moong dal for light, everyday meals.',pack:'1 kg packet'},
+      {id:12,name:"Farmer's Choice Masoor Dal 1 kg",cat:'Dal & Pulses',icon:'🫘',unit:'pack',price:125,desc:'Red lentils selected for quick cooking and smooth texture.',pack:'1 kg packet'},
+      {id:13,name:"Farmer's Choice Chana Dal 1 kg",cat:'Dal & Pulses',icon:'🫘',unit:'pack',price:110,desc:'Nutty chana dal suitable for curries, snacks and sweets.',pack:'1 kg packet'},
+      {id:14,name:"Farmer's Choice Poha 1 kg",cat:'Staples',icon:'🍚',unit:'pack',price:70,desc:'Flattened rice for breakfast, snacks and quick meals.',pack:'1 kg packet'},
+      {id:15,name:"Farmer's Choice Suji 1 kg",cat:'Staples',icon:'🌾',unit:'pack',price:62,desc:'Fine semolina for upma, halwa and baking.',pack:'1 kg packet'},
+      {id:16,name:"Farmer's Choice Mustard Seed 1 kg",cat:'Raw Grain',icon:'🌼',unit:'pack',price:93,desc:'Clean mustard seed for home cooking and traditional use.',pack:'1 kg packet'}
     ];
     let selectedProduct='Paddy', sellStep=1, cart=[];
 
@@ -549,15 +580,26 @@
       sellStep=1;selectedProduct='Paddy';renderProductOptions();populateVarieties();updateSellUI();
     }
     function renderFilters(){
-      const cats=['All','Rice','Flour','Oil','Raw Grain'];document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="chip-btn ${i===0?'active':''}" data-cat="${c}" onclick="filterProducts('${c}',this)">${c}</button>`).join('');
+      const cats=['All','Rice','Flour','Oil','Dal & Pulses','Staples','Raw Grain'];document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="chip-btn ${i===0?'active':''}" data-cat="${c}" onclick="filterProducts('${c}',this)">${c}</button>`).join('');
     }
     let activeCat='All';
     function filterProducts(cat,el){activeCat=cat;document.querySelectorAll('.chip-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderProducts()}
+    function packPalette(cat){
+      const palettes={
+        Rice:['#2f6b3a','#1e5129'],Flour:['#9b6e33','#70491f'],Oil:['#b77719','#81520d'],
+        'Dal & Pulses':['#a76422','#713f17'],Staples:['#7c7540','#585427'],'Raw Grain':['#809747','#52652d']
+      };
+      return palettes[cat]||['#3d7548','#244d2e'];
+    }
+    function renderPack(p){
+      const [main,dark]=packPalette(p.cat);
+      return `<div class="packshot" style="--pack-main:${main};--pack-dark:${dark}"><div class="pack-top"></div><div class="pack-body"></div><div class="brand-ribbon">FARMER'S CHOICE</div><div class="pack-title">${p.name.replace(/Farmer's Choice /i,'').replace(/\s+\d+\s*(kg|L|l)$/i,'')}</div><div class="pack-icon">${p.icon}</div><div class="pack-size">${p.pack||p.unit}</div><div class="pack-gloss"></div></div>`;
+    }
     function renderProducts(){
       const q=(document.getElementById('searchBox')?.value||'').toLowerCase();const list=products.filter(p=>(activeCat==='All'||p.cat===activeCat)&&(`${p.name} ${p.cat} ${p.desc}`.toLowerCase().includes(q)));
       const box=document.getElementById('products');
-      if(!list.length){box.innerHTML='<div class="empty">No products match your search. Try another grain, rice, flour or oil.</div>';return}
-      box.innerHTML=list.map(p=>`<article class="product panel"><div class="product-img"><span class="tag">${p.cat}</span><div style="font-size:74px">${p.icon}</div></div><div class="product-body"><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><div class="price"><b>₹${p.price}</b><span>per ${p.unit}</span></div><button class="add" onclick="addToCart(${p.id})">Add</button></div></div></article>`).join('');
+      if(!list.length){box.innerHTML='<div class="empty">No products match your search. Try rice, flour, oil, dal or staples.</div>';return}
+      box.innerHTML=list.map(p=>`<article class="product panel"><div class="product-img"><span class="tag">${p.cat}</span>${renderPack(p)}</div><div class="product-body"><div class="product-meta"><span class="brand-mini">✓ Farmer's Choice</span><span class="unit-note">${p.pack||'Fresh stock'}</span></div><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><div class="price-main"><b>₹${p.price.toLocaleString('en-IN')}</b><span>/ ${p.unit}</span></div><button class="add" onclick="addToCart(${p.id})">Add to cart</button></div></div></article>`).join('');
     }
     function addToCart(id){const p=products.find(x=>x.id===id);const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({id,qty:1});updateCart();toast(`${p.name} added to cart`)}
     function updateCart(){
@@ -570,15 +612,39 @@
     function openCart(){document.getElementById('cartDrawer').classList.add('open');updateCart()}
     function closeCart(){document.getElementById('cartDrawer').classList.remove('open')}
     let selectedPayment='COD';
+    function getDeliveryCharge(subtotal){
+      if(subtotal>=500) return 0;
+      if(subtotal>=400) return 10;
+      if(subtotal>=300) return 25;
+      if(subtotal>=200) return 40;
+      return 50;
+    }
+    const GST_RATE=0.05;
+    const SERVICE_FEE=5;
+    function calculateCheckout(){
+      let subtotal=0;
+      cart.forEach(item=>{const p=products.find(x=>x.id===item.id);if(p) subtotal+=p.price*item.qty;});
+      const gst=Math.round(subtotal*GST_RATE);
+      const delivery=getDeliveryCharge(subtotal);
+      const serviceFee=subtotal?SERVICE_FEE:0;
+      const total=subtotal+gst+delivery+serviceFee;
+      return {subtotal,gst,delivery,serviceFee,total};
+    }
     function renderCheckout(){
       const box=document.getElementById('checkoutItems');
-      let total=0;
-      if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.</div>';document.getElementById('checkoutTotal').textContent='₹0';return}
+      if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.</div>';document.getElementById('checkoutTotal').textContent='₹0';const b=document.getElementById('checkoutBreakdown');if(b)b.innerHTML='';return}
       box.innerHTML=cart.map(item=>{
-        const p=products.find(x=>x.id===item.id); total+=p.price*item.qty;
-        return `<div class="checkout-item"><span><b>${p.name}</b><small style="display:block;color:var(--muted)">${item.qty} × ₹${p.price}</small></span><b>₹${(p.price*item.qty).toLocaleString('en-IN')}</b></div>`;
+        const p=products.find(x=>x.id===item.id);
+        return `<div class="checkout-item"><span><b>${p.name}</b><small style="display:block;color:var(--muted)">${item.qty} × ₹${p.price.toLocaleString('en-IN')}</small></span><b>₹${(p.price*item.qty).toLocaleString('en-IN')}</b></div>`;
       }).join('');
-      document.getElementById('checkoutTotal').textContent='₹'+total.toLocaleString('en-IN');
+      const c=calculateCheckout();
+      const b=document.getElementById('checkoutBreakdown');
+      if(b){
+        b.innerHTML=`<div class="charge-row"><span>Cart subtotal</span><strong>₹${c.subtotal.toLocaleString('en-IN')}</strong></div><div class="charge-row"><span>GST (5%)</span><strong>₹${c.gst.toLocaleString('en-IN')}</strong></div><div class="charge-row"><span>Delivery charge</span><strong class="${c.delivery===0?'free':''}">${c.delivery===0?'FREE':'₹'+c.delivery}</strong></div><div class="charge-row"><span>Service fee</span><strong>₹${c.serviceFee}</strong></div>`;
+      }
+      document.getElementById('checkoutTotal').textContent='₹'+c.total.toLocaleString('en-IN');
+      const note=document.getElementById('deliveryNote');
+      if(note){note.innerHTML=c.delivery===0?'🎉 Delivery is FREE on cart value of ₹500 or more.':'Add ₹'+Math.max(0,500-c.subtotal).toLocaleString('en-IN')+' more to get FREE delivery.';}
     }
     function selectPayment(method){
       selectedPayment=method;
@@ -754,15 +820,17 @@
       if(!name||!phone||!address){toast('Please complete your delivery details');return}
       if(phone.replace(/\D/g,'').length<10){toast('Please enter a valid mobile number');return}
       if(!cart.length){toast('Your cart is empty');return}
-      let total=0;
       const items=cart.map(item=>{
-        const p=products.find(x=>x.id===item.id); total+=p.price*item.qty;
+        const p=products.find(x=>x.id===item.id);
         return {productId:p.id,name:p.name,quantity:item.qty,unit:p.unit,price:p.price};
       });
+      const totals=calculateCheckout();
       const orderId='BUY-'+new Date().getFullYear()+'-'+Math.floor(100000+Math.random()*900000);
       const data={
         orderType:'BUY',orderId,customerName:name,phone,address,
-        paymentMethod:selectedPayment,items,total,submittedAt:new Date().toISOString()
+        paymentMethod:selectedPayment,items,total:totals.total,subtotal:totals.subtotal,
+        gst:totals.gst,deliveryCharge:totals.delivery,serviceFee:totals.serviceFee,
+        submittedAt:new Date().toISOString()
       };
       try{
         localStorage.setItem('lastFasalMandiBuyOrder',JSON.stringify(data));
@@ -782,6 +850,6 @@
     document.addEventListener('DOMContentLoaded',()=>{getCurrentAccount();renderProductOptions();populateVarieties();renderFilters();renderProducts();updateCart();updateAccountUI();renderOrderHistory();const d=new Date();d.setDate(d.getDate()+3);document.getElementById('pickupDate').min=new Date().toISOString().slice(0,10);document.getElementById('pickupDate').value=d.toISOString().slice(0,10)})
   </script>
 
-<footer class="founder-footer"><div class="founder-card"><div class="founder-badge">FM</div><div class="founder-content"><p class="founder-label">ABOUT THE FOUNDER</p><h2>Built by Asikur Rahaman</h2><p>Fasal Mandi is built with a simple goal: to help farmers get a fair, transparent price for their agricultural products and connect them with better markets.</p><div class="founder-contact"><a href="mailto:asikur591@gmail.com">✉ asikur591@gmail.com</a><a href="tel:+917908059105">☎ +91 79080 59105</a></div></div></div><p class="footer-copy">© 2026 Fasal Mandi · Farmer first, fairer markets.</p></footer><style>.founder-footer{margin-top:60px;padding:28px 20px 22px;background:#10281d;color:#fff}.founder-card{max-width:1050px;margin:auto;display:flex;gap:20px;align-items:center}.founder-badge{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#d9a441;color:#10281d;display:grid;place-items:center;font-weight:800;font-size:20px}.founder-label{margin:0 0 5px;font-size:11px;letter-spacing:1.5px;opacity:.7}.founder-content h2{margin:0 0 8px;font-size:22px}.founder-content p{margin:0 0 12px;line-height:1.55;color:#dce8df}.founder-contact{display:flex;gap:18px;flex-wrap:wrap}.founder-contact a{color:#fff;text-decoration:none;font-weight:600}.footer-copy{max-width:1050px;margin:20px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#aebfb3}@media(max-width:600px){.founder-card{align-items:flex-start}.founder-content h2{font-size:19px}.founder-contact{gap:10px;flex-direction:column}}</style>
+<footer class="founder-footer"><div class="founder-card"><div class="founder-badge">FM</div><div class="founder-content"><p class="founder-label">ABOUT THE FOUNDER</p><h2>Built by Asikur Rahaman</h2><p>Fasal Mandi is built with a simple goal: to help farmers get a fair, transparent price for their agricultural products and connect them with better markets.</p><div class="founder-contact"><a href="mailto:asikur591@gmail.com">✉ asikur591@gmail.com</a><a href="tel:+917908059105">☎ +91 79080 59105</a></div><a class="founder-about-btn" href="https://asikurrahaman1.github.io" target="_blank" rel="noopener">ⓘ Know more about the founder</a></div></div><p class="footer-copy">© 2026 Fasal Mandi · Farmer first, fairer markets.</p></footer><style>.founder-footer{margin-top:60px;padding:28px 20px 22px;background:#10281d;color:#fff}.founder-card{max-width:1050px;margin:auto;display:flex;gap:20px;align-items:center}.founder-badge{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#d9a441;color:#10281d;display:grid;place-items:center;font-weight:800;font-size:20px}.founder-label{margin:0 0 5px;font-size:11px;letter-spacing:1.5px;opacity:.7}.founder-content h2{margin:0 0 8px;font-size:22px}.founder-content p{margin:0 0 12px;line-height:1.55;color:#dce8df}.founder-contact{display:flex;gap:18px;flex-wrap:wrap}.founder-contact a{color:#fff;text-decoration:none;font-weight:600}.founder-about-btn{margin-top:0;color:#173d24!important}.footer-copy{max-width:1050px;margin:20px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#aebfb3}@media(max-width:600px){.founder-card{align-items:flex-start}.founder-content h2{font-size:19px}.founder-contact{gap:10px;flex-direction:column}}</style>
 </body>
 </html>
