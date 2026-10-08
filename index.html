@@ -36,6 +36,12 @@
     .logo svg{width:29px;height:29px}
     .brand-text{font-size:18px}.brand-text small{display:block;font-weight:600;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
     .navlinks{display:flex;gap:8px;align-items:center}
+    .header-cart-btn{position:relative;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:14px;font-weight:900;box-shadow:0 5px 16px rgba(25,45,30,.06);transition:.2s;white-space:nowrap}
+    .header-cart-btn:hover{background:#f2f8ee;border-color:#cfe0c8;transform:translateY(-1px)}
+    .header-cart-icon{font-size:19px;line-height:1}
+    .header-cart-label{font-size:13px}
+    .header-cart-badge{min-width:21px;height:21px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:900}
+
     .navlinks button{border:0;background:transparent;color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:700}
     .navlinks button:hover{background:var(--secondary);color:var(--primary-dark)}
     .cart-btn{position:relative;border:1px solid var(--line)!important;background:#fff!important;color:var(--ink)!important;box-shadow:0 4px 16px rgba(25,45,30,.05)}
@@ -100,6 +106,11 @@
     @media(max-width:950px){
       .navlinks{display:none}.menu{display:block}.mobile-menu-item{display:block}.navlinks.open{display:flex}
       .navlinks button{width:100%;text-align:left;padding:12px 14px;border-radius:12px}.navlinks .cart-btn{justify-content:flex-start}
+      .header-cart-btn{margin-left:auto;margin-right:4px;width:47px;height:47px;padding:0;justify-content:center;border-radius:14px}
+      .header-cart-label{display:none}
+      .header-cart-icon{font-size:21px}
+      .header-cart-badge{position:absolute;right:-4px;top:-5px}
+
       .hero-grid,.sell-layout{grid-template-columns:1fr}.hero-visual{min-height:360px}.stepper{position:relative;top:auto}.steps{grid-template-columns:repeat(3,1fr)}.step{padding:10px}.products{grid-template-columns:repeat(2,1fr)}.trust-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:650px){
@@ -211,6 +222,11 @@
             <span class="menu-icon">📦</span><span class="menu-copy"><span>Order History</span><small>Your orders & requests</small></span>
           </button>
         </div>
+        <button class="header-cart-btn" onclick="openCart()" aria-label="Open shopping cart">
+          <span class="header-cart-icon">🛒</span>
+          <span class="header-cart-label">Cart</span>
+          <span class="header-cart-badge" id="headerCartCount">0</span>
+        </button>
         <button class="menu" onclick="toggleMobileMenu()">☰</button>
       </nav>
     </div>
@@ -595,15 +611,37 @@
       const [main,dark]=packPalette(p.cat);
       return `<div class="packshot" style="--pack-main:${main};--pack-dark:${dark}"><div class="pack-top"></div><div class="pack-body"></div><div class="brand-ribbon">FARMER'S CHOICE</div><div class="pack-title">${p.name.replace(/Farmer's Choice /i,'').replace(/\s+\d+\s*(kg|L|l)$/i,'')}</div><div class="pack-icon">${p.icon}</div><div class="pack-size">${p.pack||p.unit}</div><div class="pack-gloss"></div></div>`;
     }
+    function productCartQty(id){
+      const item=cart.find(x=>x.id===id);
+      return item ? item.qty : 0;
+    }
     function renderProducts(){
       const q=(document.getElementById('searchBox')?.value||'').toLowerCase();const list=products.filter(p=>(activeCat==='All'||p.cat===activeCat)&&(`${p.name} ${p.cat} ${p.desc}`.toLowerCase().includes(q)));
       const box=document.getElementById('products');
       if(!list.length){box.innerHTML='<div class="empty">No products match your search. Try rice, flour, oil, dal or staples.</div>';return}
-      box.innerHTML=list.map(p=>`<article class="product panel"><div class="product-img"><span class="tag">${p.cat}</span>${renderPack(p)}</div><div class="product-body"><div class="product-meta"><span class="brand-mini">✓ Farmer's Choice</span><span class="unit-note">${p.pack||'Fresh stock'}</span></div><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><div class="price-main"><b>₹${p.price.toLocaleString('en-IN')}</b><span>/ ${p.unit}</span></div><button class="add" onclick="addToCart(${p.id})">Add to cart</button></div></div></article>`).join('');
+      box.innerHTML=list.map(p=>{
+        const inCart=productCartQty(p.id)>0;
+        const button=inCart
+          ? `<button class="add go-cart" onclick="openCart()">🛒 Go to cart</button>`
+          : `<button class="add" onclick="addToCart(${p.id})">Add to cart</button>`;
+        return `<article class="product panel"><div class="product-img"><span class="tag">${p.cat}</span>${renderPack(p)}</div><div class="product-body"><div class="product-meta"><span class="brand-mini">✓ Farmer's Choice</span><span class="unit-note">${p.pack||'Fresh stock'}</span></div><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><div class="price-main"><b>₹${p.price.toLocaleString('en-IN')}</b><span>/ ${p.unit}</span></div>${button}</div></div></article>`;
+      }).join('');
     }
-    function addToCart(id){const p=products.find(x=>x.id===id);const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({id,qty:1});updateCart();toast(`${p.name} added to cart`)}
+    function addToCart(id){
+      const p=products.find(x=>x.id===id);
+      if(!p)return;
+      const ex=cart.find(x=>x.id===id);
+      if(ex) ex.qty++; else cart.push({id,qty:1});
+      updateCart();
+      toast(`${p.name} added to cart`);
+    }
     function updateCart(){
-      const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;document.getElementById('cartCount2').textContent=count;
+      const count=cart.reduce((a,b)=>a+b.qty,0);
+      document.getElementById('cartCount').textContent=count;
+      document.getElementById('cartCount2').textContent=count;
+      const headerCount=document.getElementById('headerCartCount');
+      if(headerCount) headerCount.textContent=count;
+      renderProducts();
       const box=document.getElementById('cartItems');
       if(!cart.length){box.innerHTML='<div class="empty" style="padding:35px 5px">Your cart is empty.<br/>Add Farmer\'s Choice products to continue.</div>';document.getElementById('cartTotal').textContent='₹0';return}
       let total=0;box.innerHTML=cart.map(item=>{const p=products.find(x=>x.id===item.id);total+=p.price*item.qty;return `<div class="cart-item"><div class="cart-thumb">${p.icon}</div><div><b>${p.name}</b><small>₹${p.price} each</small></div><div class="cart-qty"><button onclick="removeCart(${p.id})" aria-label="Decrease quantity">−</button><span>${item.qty}</span><button onclick="addToCart(${p.id})" aria-label="Increase quantity">+</button></div></div>`}).join('');document.getElementById('cartTotal').textContent='₹'+total.toLocaleString('en-IN');
